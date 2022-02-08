@@ -8,7 +8,7 @@
 import SwiftUI
 
 @main
-struct peer_to_peer_talkApp: App {
+struct PeerToPeerTalkApp: App {
     var body: some Scene {
         WindowGroup {
             ContentView()
