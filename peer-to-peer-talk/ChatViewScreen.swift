@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct ContentView: View {
+struct ChatViewScreen: View {
     @State private var textValue: String = ""
     @State private var isSubmitted = false
     @State var myMessages: [String] = []
@@ -31,6 +31,15 @@ struct ContentView: View {
                         textValue = ""
                     }
                 
+                Button {
+                    isSubmitted = true
+                    myMessages.append(textValue)
+                    textValue = ""
+                } label: {
+                    Image(systemName: "paperplane.fill")
+                        .foregroundColor(Color.primary)
+                }
+                
             }
         }
         .padding(.all, 15)
@@ -40,6 +49,6 @@ struct ContentView: View {
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
-        ContentView()
+        ChatViewScreen()
     }
 }
