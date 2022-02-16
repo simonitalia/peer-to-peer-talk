@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2AEA957627B4178A009C7645 /* MCServiceManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AEA957527B4178A009C7645 /* MCServiceManager.swift */; };
 		2AF0459827B2B09D0002FB71 /* PeerToPeerTalkApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AF0459727B2B09D0002FB71 /* PeerToPeerTalkApp.swift */; };
 		2AF0459A27B2B09D0002FB71 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AF0459927B2B09D0002FB71 /* ContentView.swift */; };
 		2AF0459C27B2B09F0002FB71 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2AF0459B27B2B09F0002FB71 /* Assets.xcassets */; };
@@ -14,6 +15,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		2AEA957527B4178A009C7645 /* MCServiceManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MCServiceManager.swift; sourceTree = "<group>"; };
 		2AF0459427B2B09D0002FB71 /* peer-to-peer-talk.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "peer-to-peer-talk.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		2AF0459727B2B09D0002FB71 /* PeerToPeerTalkApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PeerToPeerTalkApp.swift; sourceTree = "<group>"; };
 		2AF0459927B2B09D0002FB71 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -79,6 +81,7 @@
 		2AF045A627B2C9D30002FB71 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				2AEA957527B4178A009C7645 /* MCServiceManager.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -155,6 +158,7 @@
 			files = (
 				2AF0459A27B2B09D0002FB71 /* ContentView.swift in Sources */,
 				2AF0459827B2B09D0002FB71 /* PeerToPeerTalkApp.swift in Sources */,
+				2AEA957627B4178A009C7645 /* MCServiceManager.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
