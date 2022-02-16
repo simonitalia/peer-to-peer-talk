@@ -8,11 +8,35 @@
 import SwiftUI
 
 struct ContentView: View {
+    @State private var textValue: String = ""
+    @State private var isSubmitted = false
+    @State var myMessages: [String] = []
+    
+    
     var body: some View {
-        Text("Hello, world!")
-            .padding()
+        
+        VStack(alignment: .trailing) {
+            if isSubmitted == true {
+                ForEach(myMessages) { message in
+                    TextBubbleView(text: message, bubbleColor: Color("BubbleColor"))
+                }
+            }
+            Spacer()
+            HStack {
+                TextField("Type something", text: $textValue)
+                    .padding(.all, 15)
+                    .onSubmit {
+                        isSubmitted = true
+                        myMessages.append(textValue)
+                        textValue = ""
+                    }
+                
+            }
+        }
+        .padding(.all, 15)
     }
 }
+
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
