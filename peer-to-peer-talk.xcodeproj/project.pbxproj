@@ -7,20 +7,42 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+<<<<<<< HEAD
 		2AEA957627B4178A009C7645 /* MCServiceManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AEA957527B4178A009C7645 /* MCServiceManager.swift */; };
 		2AF0459827B2B09D0002FB71 /* peer-to-peer-talkApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AF0459727B2B09D0002FB71 /* peer-to-peer-talkApp.swift */; };
 		2AF0459A27B2B09D0002FB71 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AF0459927B2B09D0002FB71 /* ContentView.swift */; };
+=======
+		2AF0459827B2B09D0002FB71 /* peer_to_peer_talkApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AF0459727B2B09D0002FB71 /* peer_to_peer_talkApp.swift */; };
+		2AF0459A27B2B09D0002FB71 /* ChatViewScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AF0459927B2B09D0002FB71 /* ChatViewScreen.swift */; };
+>>>>>>> chat-screen
 		2AF0459C27B2B09F0002FB71 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2AF0459B27B2B09F0002FB71 /* Assets.xcassets */; };
 		2AF0459F27B2B09F0002FB71 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2AF0459E27B2B09F0002FB71 /* Preview Assets.xcassets */; };
+		EEB41EB527BBE6DD00BE76BD /* TextBubbleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEB41EB427BBE6DD00BE76BD /* TextBubbleView.swift */; };
+		EEB41EB927BC00D600BE76BD /* String+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEB41EB827BC00D600BE76BD /* String+Ext.swift */; };
+		EEB41EEF27BE694800BE76BD /* ChatHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEB41EEE27BE694800BE76BD /* ChatHelper.swift */; };
+		EEB41EF127BE6A6500BE76BD /* Message.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEB41EF027BE6A6500BE76BD /* Message.swift */; };
+		EEB41EF327BE6AA200BE76BD /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEB41EF227BE6AA200BE76BD /* User.swift */; };
+		EEB41EF527BE883200BE76BD /* KeyboardResponder.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEB41EF427BE883200BE76BD /* KeyboardResponder.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		2AEA957527B4178A009C7645 /* MCServiceManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MCServiceManager.swift; sourceTree = "<group>"; };
 		2AF0459427B2B09D0002FB71 /* peer-to-peer-talk.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "peer-to-peer-talk.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+<<<<<<< HEAD
 		2AF0459727B2B09D0002FB71 /* peer-to-peer-talkApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "peer-to-peer-talkApp.swift"; sourceTree = "<group>"; };
 		2AF0459927B2B09D0002FB71 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+=======
+		2AF0459727B2B09D0002FB71 /* peer_to_peer_talkApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = peer_to_peer_talkApp.swift; sourceTree = "<group>"; };
+		2AF0459927B2B09D0002FB71 /* ChatViewScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatViewScreen.swift; sourceTree = "<group>"; };
+>>>>>>> chat-screen
 		2AF0459B27B2B09F0002FB71 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		2AF0459E27B2B09F0002FB71 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		EEB41EB427BBE6DD00BE76BD /* TextBubbleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextBubbleView.swift; sourceTree = "<group>"; };
+		EEB41EB827BC00D600BE76BD /* String+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Ext.swift"; sourceTree = "<group>"; };
+		EEB41EEE27BE694800BE76BD /* ChatHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatHelper.swift; sourceTree = "<group>"; };
+		EEB41EF027BE6A6500BE76BD /* Message.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Message.swift; sourceTree = "<group>"; };
+		EEB41EF227BE6AA200BE76BD /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		EEB41EF427BE883200BE76BD /* KeyboardResponder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardResponder.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -53,9 +75,20 @@
 		2AF0459627B2B09D0002FB71 /* peer-to-peer-talk */ = {
 			isa = PBXGroup;
 			children = (
+<<<<<<< HEAD
 				2AF0459727B2B09D0002FB71 /* peer-to-peer-talkApp.swift */,
 				2AEA957527B4178A009C7645 /* MCServiceManager.swift */,
 				2AF0459927B2B09D0002FB71 /* ContentView.swift */,
+=======
+				2AF0459727B2B09D0002FB71 /* peer_to_peer_talkApp.swift */,
+				2AF0459927B2B09D0002FB71 /* ChatViewScreen.swift */,
+				EEB41EB427BBE6DD00BE76BD /* TextBubbleView.swift */,
+				EEB41EF427BE883200BE76BD /* KeyboardResponder.swift */,
+				EEB41EF027BE6A6500BE76BD /* Message.swift */,
+				EEB41EF227BE6AA200BE76BD /* User.swift */,
+				EEB41EB827BC00D600BE76BD /* String+Ext.swift */,
+				EEB41EEE27BE694800BE76BD /* ChatHelper.swift */,
+>>>>>>> chat-screen
 				2AF0459B27B2B09F0002FB71 /* Assets.xcassets */,
 				2AF0459D27B2B09F0002FB71 /* Preview Content */,
 			);
@@ -140,9 +173,20 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+<<<<<<< HEAD
 				2AF0459A27B2B09D0002FB71 /* ContentView.swift in Sources */,
 				2AF0459827B2B09D0002FB71 /* peer-to-peer-talkApp.swift in Sources */,
 				2AEA957627B4178A009C7645 /* MCServiceManager.swift in Sources */,
+=======
+				2AF0459A27B2B09D0002FB71 /* ChatViewScreen.swift in Sources */,
+				EEB41EB527BBE6DD00BE76BD /* TextBubbleView.swift in Sources */,
+				EEB41EB927BC00D600BE76BD /* String+Ext.swift in Sources */,
+				EEB41EF127BE6A6500BE76BD /* Message.swift in Sources */,
+				2AF0459827B2B09D0002FB71 /* peer_to_peer_talkApp.swift in Sources */,
+				EEB41EF527BE883200BE76BD /* KeyboardResponder.swift in Sources */,
+				EEB41EEF27BE694800BE76BD /* ChatHelper.swift in Sources */,
+				EEB41EF327BE6AA200BE76BD /* User.swift in Sources */,
+>>>>>>> chat-screen
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
