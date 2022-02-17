@@ -13,7 +13,9 @@ struct OnboardingSecond: View {
     @State var showingDetail = false
 
     
-    let randomString = UUID().uuidString //Change name; make it a bit shorter
+    var randomString = "\(UIDevice.current.name)" //Change name; make it a bit shorter
+    var randomNumber = Int.random(in: 1...99)
+    
     
 
     var body: some View {
@@ -49,7 +51,7 @@ struct OnboardingSecond: View {
                 .offset(x: 0, y: -200)
             
                         
-            Text(randomString)
+            Text("\(randomString):\(randomNumber)")
                 .foregroundColor(.white)
                 .padding()
                 .background(Color.gray)
