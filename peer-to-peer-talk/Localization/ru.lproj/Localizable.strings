@@ -1,4 +1,7 @@
 /* No comment provided by engineer. */
+"App Settings" = "Настройки приложения";
+
+/* No comment provided by engineer. */
 "Confirm" = "Продолжить";
 
 /* No comment provided by engineer. */
@@ -6,9 +9,6 @@
 
 /* No comment provided by engineer. */
 "Display name will be generated each time you open the app." = "Отображаемое имя будет генерироваться каждый раз, когда вы открываете приложение.";
-
-/* No comment provided by engineer. */
-"Please choose your language" = "Пожалуйста, выберите язык";
 
 /* No comment provided by engineer. */
 "Please confirm language that you want to use in this app." = "Пожалуйста, подтвердите язык, который будет использоваться в этом приложении.";

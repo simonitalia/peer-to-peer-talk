@@ -9,6 +9,7 @@ import SwiftUI
 
 struct OnboardingFirst: View {
     
+    
     let picker_values = ["Russian", "Chinese", "English", "Italian", "Japanese"]
     @State private var selectedLanguage = "English"
     @State var showingDetail = false
@@ -32,13 +33,32 @@ struct OnboardingFirst: View {
                 .offset(x: 0, y: -120)
             
             VStack {
-                Picker("Please choose your language", selection: $selectedLanguage) {
-                                ForEach(picker_values, id: \.self) {
-                                    Text($0)
-            }
-                }
-                .pickerStyle(.wheel)
-                .offset(x: 0, y: -20)
+//                Picker("Please choose your language", selection: $selectedLanguage) {
+//                                ForEach(picker_values, id: \.self) {
+//                                    Text($0)
+//            }
+//                }
+//                .pickerStyle(.wheel)
+//                .offset(x: 0, y: -20)
+                Button(action: {
+    //                                self.showingDetail.toggle()
+                    UIApplication.shared.open(URL(string: UIApplication.openSettingsURLString)!, options: [:], completionHandler: nil)
+                                }) {
+                                    HStack{
+                                        
+                                        Image(systemName: "gear")
+                                            .foregroundColor(Color.black)
+                                            
+                                        Text("App Settings")
+                                            .foregroundColor(Color.black)
+                                    }
+                
+                                }
+                                .buttonStyle(BigPaddedButtonStyle2())
+                                .offset(x: 0, y: -60)
+                                .shadow(color: .black, radius: 3, x: 3, y: 3)
+                                
+             
             }
             
             NavigationLink(destination: OnboardingSecond().navigationBarBackButtonHidden(true)) {
