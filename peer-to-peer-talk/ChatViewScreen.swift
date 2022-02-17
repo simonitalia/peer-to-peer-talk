@@ -8,41 +8,57 @@
 import SwiftUI
 
 struct ChatViewScreen: View {
-    @State private var textValue: String = ""
-    @State private var isSubmitted = false
-    @State var myMessages: [String] = []
+    @State private var typingMessage = ""
+    @EnvironmentObject var chatHelper: ChatHelper
+    @ObservedObject private var keyboard = KeyboardResponder()
     
+    init() {
+        UITableView.appearance().separatorStyle = .none
+        UITableView.appearance().tableFooterView = UIView()
+    }
     
     var body: some View {
         
-        VStack(alignment: .trailing) {
-            if isSubmitted == true {
-                ForEach(myMessages) { message in
-                    TextBubbleView(text: message, bubbleColor: Color("BubbleColor"))
-                }
-            }
-            Spacer()
-            HStack {
-                TextField("Type something", text: $textValue)
-                    .padding(.all, 15)
-                    .onSubmit {
-                        isSubmitted = true
-                        myMessages.append(textValue)
-                        textValue = ""
+        NavigationView {
+            VStack(alignment: .trailing) {
+                List {
+                    ForEach(chatHelper.realTimeMessages, id: \.self) { message in
+                        TextBubbleView(currentMessage: message)
                     }
-                
-                Button {
-                    isSubmitted = true
-                    myMessages.append(textValue)
-                    textValue = ""
-                } label: {
-                    Image(systemName: "paperplane.fill")
-                        .foregroundColor(Color.primary)
                 }
-                
+                Spacer()
+                HStack {
+                    TextField("Type something", text: $typingMessage)
+                        .font(.system(size: 15, weight: .regular))
+                        .padding(.all, 15)
+                        .textFieldStyle(.roundedBorder)
+                        .onSubmit {
+                            sendMessage()
+                            
+                        }
+                    
+                    Button {
+                        sendMessage()
+                        
+                    } label: {
+                        Image(systemName: "arrow.up.circle")
+                            .font(.system(size: 25, weight: .regular))
+                            .foregroundColor(Color.primary)
+                    }
+                    
+                }
+                .padding(.all, 15)
             }
+            .navigationBarTitle(Text(DataSource.firstUser.name), displayMode: .inline)
+            .padding(.bottom, keyboard.currentHeight)
+            .edgesIgnoringSafeArea(keyboard.currentHeight == 0.0 ? .leading: .bottom)
         }
-        .padding(.all, 15)
+    }
+    
+    
+    func sendMessage() {
+        chatHelper.sendMessage(Message(content: typingMessage, user: DataSource.secondUser))
+        typingMessage = ""
     }
 }
 
