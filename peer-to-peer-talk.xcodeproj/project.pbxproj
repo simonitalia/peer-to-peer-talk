@@ -11,6 +11,7 @@
 		2AF0459827B2B09D0002FB71 /* peer-to-peer-talkApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AF0459727B2B09D0002FB71 /* peer-to-peer-talkApp.swift */; };
 		2AF0459A27B2B09D0002FB71 /* ChatViewScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AF0459927B2B09D0002FB71 /* ChatViewScreen.swift */; };
 		1C5E0B1227BBA53A00B0C5A7 /* OnboardingSecond.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C5E0B1127BBA53A00B0C5A7 /* OnboardingSecond.swift */; };
+		1C92970627BE8A69002AAF11 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 1C92970827BE8A69002AAF11 /* Localizable.strings */; };
 		1C9A3A1027BB9DD100C146E8 /* OnboardingFirst.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C9A3A0F27BB9DD100C146E8 /* OnboardingFirst.swift */; };
 		2AF0459C27B2B09F0002FB71 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2AF0459B27B2B09F0002FB71 /* Assets.xcassets */; };
 		2AF0459F27B2B09F0002FB71 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2AF0459E27B2B09F0002FB71 /* Preview Assets.xcassets */; };
@@ -25,6 +26,8 @@
 /* Begin PBXFileReference section */
 		2AEA957527B4178A009C7645 /* MCServiceManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MCServiceManager.swift; sourceTree = "<group>"; };
 		1C5E0B1127BBA53A00B0C5A7 /* OnboardingSecond.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingSecond.swift; sourceTree = "<group>"; };
+		1C92970727BE8A69002AAF11 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
+		1C92970927BE8A90002AAF11 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/Localizable.strings; sourceTree = "<group>"; };
 		1C9A3A0F27BB9DD100C146E8 /* OnboardingFirst.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingFirst.swift; sourceTree = "<group>"; };
 		2AF0459427B2B09D0002FB71 /* peer-to-peer-talk.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "peer-to-peer-talk.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		2AF0459727B2B09D0002FB71 /* peer-to-peer-talkApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "peer-to-peer-talkApp.swift"; sourceTree = "<group>"; };
@@ -50,6 +53,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		1C92970327BE8A3B002AAF11 /* Localization */ = {
+			isa = PBXGroup;
+			children = (
+				1C92970827BE8A69002AAF11 /* Localizable.strings */,
+			);
+			path = Localization;
+			sourceTree = "<group>";
+		};
 		2AF0458B27B2B09D0002FB71 = {
 			isa = PBXGroup;
 			children = (
@@ -69,6 +80,7 @@
 		2AF0459627B2B09D0002FB71 /* peer-to-peer-talk */ = {
 			isa = PBXGroup;
 			children = (
+<<<<<<< HEAD
 				2AEA957527B4178A009C7645 /* MCServiceManager.swift */,
 				2AF0459727B2B09D0002FB71 /* peer-to-peer-talkApp.swift */,
 				2AF0459927B2B09D0002FB71 /* ChatViewScreen.swift */,
@@ -78,6 +90,12 @@
 				EEB41EF227BE6AA200BE76BD /* User.swift */,
 				EEB41EB827BC00D600BE76BD /* String+Ext.swift */,
 				EEB41EEE27BE694800BE76BD /* ChatHelper.swift */,
+=======
+				2AF0459727B2B09D0002FB71 /* PeerToPeerTalkApp.swift */,
+				1C92970327BE8A3B002AAF11 /* Localization */,
+				2AF045A627B2C9D30002FB71 /* Models */,
+				2AF045A527B2C9750002FB71 /* Views */,
+>>>>>>> a3509a4 (added localization changes in code: Eng -> Rus,)
 				2AF0459B27B2B09F0002FB71 /* Assets.xcassets */,
 				2AF0459D27B2B09F0002FB71 /* Preview Content */,
 			);
@@ -151,6 +169,7 @@
 			knownRegions = (
 				en,
 				Base,
+				ru,
 			);
 			mainGroup = 2AF0458B27B2B09D0002FB71;
 			productRefGroup = 2AF0459527B2B09D0002FB71 /* Products */;
@@ -168,6 +187,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				2AF0459F27B2B09F0002FB71 /* Preview Assets.xcassets in Resources */,
+				1C92970627BE8A69002AAF11 /* Localizable.strings in Resources */,
 				2AF0459C27B2B09F0002FB71 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -195,11 +215,24 @@
 		};
 /* End PBXSourcesBuildPhase section */
 
+/* Begin PBXVariantGroup section */
+		1C92970827BE8A69002AAF11 /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				1C92970727BE8A69002AAF11 /* en */,
+				1C92970927BE8A90002AAF11 /* ru */,
+			);
+			name = Localizable.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
 /* Begin XCBuildConfiguration section */
 		2AF045A027B2B09F0002FB71 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
@@ -261,6 +294,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";

@@ -24,15 +24,15 @@ struct OnboardingSecond: View {
             
             Text("Welcome to P2P Chat")
                 .font(Font.system(.largeTitle, design: .rounded).weight(.light))
-                .frame(width: 200, height: 100, alignment: .center)
+                .frame(width: 200, height: 200, alignment: .center)
                 .multilineTextAlignment(.center)
-                .offset(x: 0, y: -250)
+                .offset(x: 0, y: -150)
             
             Text("Please, Confirm your display name")
                 .font(Font.system(.largeTitle, design: .rounded).weight(.light))
-                .frame(width: 300, height: 100, alignment: .center)
+                .frame(width: 300, height: 200, alignment: .center)
                 .multilineTextAlignment(.center)
-                .offset(x: 0, y: -220)
+                .offset(x: 0, y: -200)
             
                         
             Text(randomString)
@@ -52,7 +52,7 @@ struct OnboardingSecond: View {
             
                             }
                             .buttonStyle(BigPaddedButtonStyle2())
-                            .offset(x: 0, y: 35)
+                            .offset(x: 0, y: 5)
                 
             
 //                }
@@ -64,8 +64,8 @@ struct OnboardingSecond: View {
                 Text("Display name will be generated each time you open the app.")
                     .padding()
                     .multilineTextAlignment(.center)
-                    .frame(width: 290, height: 80)
-                    .offset(x: 0, y: 80)
+                    .frame(width: 430, height: 130)
+                    .offset(x: 0, y: 20)
             }
     }
         

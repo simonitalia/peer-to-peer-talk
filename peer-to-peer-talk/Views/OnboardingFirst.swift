@@ -19,10 +19,10 @@ struct OnboardingFirst: View {
         
             Text("Welcome to P2P Chat")
                 .font(Font.system(.largeTitle, design: .rounded).weight(.light))
-                .frame(width: 200, height: 100, alignment: .center)
+                .frame(width: 200, height: 150, alignment: .center)
                 .multilineTextAlignment(.center)
 //                .background(.red)
-                .offset(x: 0, y: -150)
+                .offset(x: 0, y: -130)
             
             Text("Please, Choose your language")
                 .font(Font.system(.largeTitle, design: .rounded).weight(.light))
@@ -53,8 +53,8 @@ struct OnboardingFirst: View {
                 Text("Please confirm language that you want to use in this app.")
                     .padding()
                     .multilineTextAlignment(.center)
-                    .frame(width: 290, height: 80)
-                    .offset(x: 0, y: 80)
+                    .frame(width: 290, height: 120)
+                    .offset(x: 0, y: 40)
             }
     }
         
@@ -72,7 +72,7 @@ struct BigPaddedButtonStyle: ButtonStyle {
         return configuration
             .label
             .foregroundColor(configuration.isPressed ? .gray : .black)
-            .padding(EdgeInsets(top: 0, leading: 150, bottom: 0, trailing: 150))
+            .padding(EdgeInsets(top: 0, leading: 110, bottom: 0, trailing: 110))
             .frame(minWidth: 0, maxWidth: .infinity)
             .padding()
             .background(steelGray)
