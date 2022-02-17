@@ -13,7 +13,7 @@ struct OnboardingSecond: View {
     @State var showingDetail = false
 
     
-    let randomString = UUID().uuidString
+    let randomString = UUID().uuidString //Change name; make it a bit shorter
     
 
     var body: some View {
@@ -22,25 +22,39 @@ struct OnboardingSecond: View {
         NavigationView{
         VStack {
             
-            Text("Welcome to P2P Chat")
-                .font(Font.system(.largeTitle, design: .rounded).weight(.light))
-                .frame(width: 200, height: 200, alignment: .center)
-                .multilineTextAlignment(.center)
-                .offset(x: 0, y: -150)
+//            Text("Welcome to P2P Chat")
+//                .font(Font.system(.largeTitle, design: .rounded).weight(.light))
+//                .frame(width: 200, height: 200, alignment: .center)
+//                .multilineTextAlignment(.center)
+//                .offset(x: 0, y: -150)
+            
+//            Text("Please, Confirm your display name")
+//                .font(Font.system(.largeTitle, design: .rounded).weight(.light))
+//                .frame(width: 300, height: 200, alignment: .center)
+//                .multilineTextAlignment(.center)
+//                .offset(x: 0, y: -240)
             
             Text("Please, Confirm your display name")
                 .font(Font.system(.largeTitle, design: .rounded).weight(.light))
-                .frame(width: 300, height: 200, alignment: .center)
+                .frame(width: 300, height: 150, alignment: .center)
                 .multilineTextAlignment(.center)
-                .offset(x: 0, y: -200)
+//                .background(.red)
+                .offset(x: 0, y: -170)
+            
+            Text("This name is unchangeble")
+                .font(Font.system(.title3, design: .rounded).weight(.regular))
+                .frame(width: 200, height: 100, alignment: .center)
+                .multilineTextAlignment(.center)
+//                .background(.red)
+                .offset(x: 0, y: -120)
             
                         
             Text(randomString)
                 .foregroundColor(.white)
                 .padding()
                 .background(Color.gray)
-                .offset(x: 0, y: -100)
-                .shadow(color: .black, radius: 3, x: 3, y: 3)
+                .offset(x: 0, y: -50)
+//                .shadow(color: .black, radius: 3, x: 3, y: 3)
           
             
 //            NavigationLink(destination: OnboardingSecond()) {
@@ -48,11 +62,11 @@ struct OnboardingSecond: View {
                                 self.showingDetail.toggle()
                             }) {
             
-                                Text("Confirm and Continue")
+                                Text("Continue")
             
                             }
                             .buttonStyle(BigPaddedButtonStyle2())
-                            .offset(x: 0, y: 5)
+                            .offset(x: 0, y: 40)
                 
             
 //                }
@@ -65,7 +79,7 @@ struct OnboardingSecond: View {
                     .padding()
                     .multilineTextAlignment(.center)
                     .frame(width: 430, height: 130)
-                    .offset(x: 0, y: 20)
+                    .offset(x: 0, y: 100)
             }
     }
         

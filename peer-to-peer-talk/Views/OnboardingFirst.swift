@@ -25,8 +25,8 @@ struct OnboardingFirst: View {
                 .offset(x: 0, y: -130)
             
             Text("Please, Choose your language")
-                .font(Font.system(.largeTitle, design: .rounded).weight(.light))
-                .frame(width: 300, height: 100, alignment: .center)
+                .font(Font.system(.title3, design: .rounded).weight(.regular))
+                .frame(width: 200, height: 100, alignment: .center)
                 .multilineTextAlignment(.center)
 //                .background(.red)
                 .offset(x: 0, y: -120)

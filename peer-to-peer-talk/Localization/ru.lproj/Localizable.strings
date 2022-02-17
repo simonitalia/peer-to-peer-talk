@@ -2,7 +2,7 @@
 "Confirm" = "Продолжить";
 
 /* No comment provided by engineer. */
-"Confirm and Continue" = "Подтвердить и продолжить";
+"Continue" = "Подтвердить";
 
 /* No comment provided by engineer. */
 "Display name will be generated each time you open the app." = "Отображаемое имя будет генерироваться каждый раз, когда вы открываете приложение.";
@@ -18,6 +18,9 @@
 
 /* No comment provided by engineer. */
 "Please, Confirm your display name" = "Пожалуйста, подтвердите ваше Отображаемое имя";
+
+/* No comment provided by engineer. */
+"This name is unchangeble" = "Это имя неизменяемо";
 
 /* No comment provided by engineer. */
 "Welcome to P2P Chat" = "Добро пожаловать в P2P Чат";
