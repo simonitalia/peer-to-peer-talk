@@ -8,7 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		2AEA957627B4178A009C7645 /* MCServiceManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AEA957527B4178A009C7645 /* MCServiceManager.swift */; };
-		2AF0459827B2B09D0002FB71 /* PeerToPeerTalkApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AF0459727B2B09D0002FB71 /* PeerToPeerTalkApp.swift */; };
+		2AF0459827B2B09D0002FB71 /* peer-to-peer-talkApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AF0459727B2B09D0002FB71 /* peer-to-peer-talkApp.swift */; };
 		2AF0459A27B2B09D0002FB71 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AF0459927B2B09D0002FB71 /* ContentView.swift */; };
 		2AF0459C27B2B09F0002FB71 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2AF0459B27B2B09F0002FB71 /* Assets.xcassets */; };
 		2AF0459F27B2B09F0002FB71 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2AF0459E27B2B09F0002FB71 /* Preview Assets.xcassets */; };
@@ -17,7 +17,7 @@
 /* Begin PBXFileReference section */
 		2AEA957527B4178A009C7645 /* MCServiceManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MCServiceManager.swift; sourceTree = "<group>"; };
 		2AF0459427B2B09D0002FB71 /* peer-to-peer-talk.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "peer-to-peer-talk.app"; sourceTree = BUILT_PRODUCTS_DIR; };
-		2AF0459727B2B09D0002FB71 /* PeerToPeerTalkApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PeerToPeerTalkApp.swift; sourceTree = "<group>"; };
+		2AF0459727B2B09D0002FB71 /* peer-to-peer-talkApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "peer-to-peer-talkApp.swift"; sourceTree = "<group>"; };
 		2AF0459927B2B09D0002FB71 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		2AF0459B27B2B09F0002FB71 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		2AF0459E27B2B09F0002FB71 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
@@ -53,9 +53,9 @@
 		2AF0459627B2B09D0002FB71 /* peer-to-peer-talk */ = {
 			isa = PBXGroup;
 			children = (
-				2AF0459727B2B09D0002FB71 /* PeerToPeerTalkApp.swift */,
-				2AF045A627B2C9D30002FB71 /* Models */,
-				2AF045A527B2C9750002FB71 /* Views */,
+				2AF0459727B2B09D0002FB71 /* peer-to-peer-talkApp.swift */,
+				2AEA957527B4178A009C7645 /* MCServiceManager.swift */,
+				2AF0459927B2B09D0002FB71 /* ContentView.swift */,
 				2AF0459B27B2B09F0002FB71 /* Assets.xcassets */,
 				2AF0459D27B2B09F0002FB71 /* Preview Content */,
 			);
@@ -68,22 +68,6 @@
 				2AF0459E27B2B09F0002FB71 /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
-			sourceTree = "<group>";
-		};
-		2AF045A527B2C9750002FB71 /* Views */ = {
-			isa = PBXGroup;
-			children = (
-				2AF0459927B2B09D0002FB71 /* ContentView.swift */,
-			);
-			path = Views;
-			sourceTree = "<group>";
-		};
-		2AF045A627B2C9D30002FB71 /* Models */ = {
-			isa = PBXGroup;
-			children = (
-				2AEA957527B4178A009C7645 /* MCServiceManager.swift */,
-			);
-			path = Models;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -157,7 +141,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				2AF0459A27B2B09D0002FB71 /* ContentView.swift in Sources */,
-				2AF0459827B2B09D0002FB71 /* PeerToPeerTalkApp.swift in Sources */,
+				2AF0459827B2B09D0002FB71 /* peer-to-peer-talkApp.swift in Sources */,
 				2AEA957627B4178A009C7645 /* MCServiceManager.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
