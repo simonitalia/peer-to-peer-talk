@@ -80,7 +80,6 @@
 		2AF0459627B2B09D0002FB71 /* peer-to-peer-talk */ = {
 			isa = PBXGroup;
 			children = (
-<<<<<<< HEAD
 				2AEA957527B4178A009C7645 /* MCServiceManager.swift */,
 				2AF0459727B2B09D0002FB71 /* peer-to-peer-talkApp.swift */,
 				2AF0459927B2B09D0002FB71 /* ChatViewScreen.swift */,
@@ -90,11 +89,8 @@
 				EEB41EF227BE6AA200BE76BD /* User.swift */,
 				EEB41EB827BC00D600BE76BD /* String+Ext.swift */,
 				EEB41EEE27BE694800BE76BD /* ChatHelper.swift */,
-=======
-				2AF0459727B2B09D0002FB71 /* PeerToPeerTalkApp.swift */,
 				1C92970327BE8A3B002AAF11 /* Localization */,
 				2AF045A527B2C9750002FB71 /* Views */,
->>>>>>> a3509a4 (added localization changes in code: Eng -> Rus,)
 				2AF0459B27B2B09F0002FB71 /* Assets.xcassets */,
 				2AF0459D27B2B09F0002FB71 /* Preview Content */,
 			);
