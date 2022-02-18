@@ -11,21 +11,25 @@ struct ChatViewScreen: View {
     @State private var typingMessage = ""
     @EnvironmentObject var chatHelper: ChatHelper
     @ObservedObject private var keyboard = KeyboardResponder()
+
     
     init() {
         UITableView.appearance().separatorStyle = .none
         UITableView.appearance().tableFooterView = UIView()
     }
     
+    
     var body: some View {
-        
-        NavigationView {
-            VStack(alignment: .trailing) {
+        ScrollViewReader { proxy in
+            VStack {
                 List {
-                    ForEach(chatHelper.realTimeMessages, id: \.self) { message in
-                        TextBubbleView(currentMessage: message)
+                    ForEach(chatHelper.realTimeMessages) { message in
+                        TextBubbleView(message: message)
                     }
                 }
+                
+                
+                
                 Spacer()
                 HStack {
                     TextField("Type something", text: $typingMessage)
@@ -34,9 +38,7 @@ struct ChatViewScreen: View {
                         .textFieldStyle(.roundedBorder)
                         .onSubmit {
                             sendMessage()
-                            
                         }
-                    
                     Button {
                         sendMessage()
                         
@@ -45,19 +47,24 @@ struct ChatViewScreen: View {
                             .font(.system(size: 25, weight: .regular))
                             .foregroundColor(Color.primary)
                     }
-                    
                 }
                 .padding(.all, 15)
             }
-            .navigationBarTitle(Text(DataSource.firstUser.name), displayMode: .inline)
-            .padding(.bottom, keyboard.currentHeight)
+            
+            .onAppear {
+                proxy.scrollTo(chatHelper.realTimeMessages.last)
+            }
+//            .offset(y: -keyboard.currentHeight * 0.9 )
             .edgesIgnoringSafeArea(keyboard.currentHeight == 0.0 ? .leading: .bottom)
+            
+            
         }
     }
     
     
     func sendMessage() {
-        chatHelper.sendMessage(Message(content: typingMessage, user: DataSource.secondUser))
+        let newMessage = Message(content: typingMessage, user: DataSource.secondUser, isReceived: false)
+        chatHelper.sendMessage(newMessage)
         typingMessage = ""
     }
 }
