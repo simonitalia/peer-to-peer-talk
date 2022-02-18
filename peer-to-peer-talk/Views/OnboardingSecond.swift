@@ -7,22 +7,26 @@
 
 import SwiftUI
 
+
+
 struct OnboardingSecond: View {
     
     
     @State var showingDetail = false
 
     
-    var randomString = "\(UIDevice.current.name)" //Change name; make it a bit shorter
-    var randomNumber = Int.random(in: 1...99)
+//    var randomString = "\(UIDevice.current.name)" //Change name; make it a bit shorter
+//    var randomNumber = Int.random(in: 1...99)
     
     
-
     var body: some View {
         
+        let randomString = String.random()
+
         
         NavigationView{
         VStack {
+            
             
 //            Text("Welcome to P2P Chat")
 //                .font(Font.system(.largeTitle, design: .rounded).weight(.light))
@@ -51,11 +55,12 @@ struct OnboardingSecond: View {
                 .offset(x: 0, y: -200)
             
                         
-            Text("\(randomString):\(randomNumber)")
+//            Text("\(randomString):\(randomNumber)")
+            Text(randomString)
                 .foregroundColor(.white)
                 .padding()
                 .background(Color.gray)
-                .offset(x: 0, y: -50)
+                .offset(x: 0, y: -100)
 //                .shadow(color: .black, radius: 3, x: 3, y: 3)
           
             
@@ -68,8 +73,8 @@ struct OnboardingSecond: View {
                                 Text("Continue")
             
                             }
-                            .buttonStyle(BigPaddedButtonStyle2())
-                            .offset(x: 0, y: 40)
+                            .buttonStyle(BigPaddedButtonStyle())
+//                            .offset(x: 0, y: 40)
                 
             
 //                }
@@ -82,7 +87,7 @@ struct OnboardingSecond: View {
                     .padding()
                     .multilineTextAlignment(.center)
                     .frame(width: 430, height: 130)
-                    .offset(x: 0, y: 100)
+                    .offset(x: 0, y: 40)
             }
     }
         
@@ -108,8 +113,27 @@ struct BigPaddedButtonStyle2: ButtonStyle {
     }
 }
 
+
+
+extension String {
+
+    static func random(length: Int = 6) -> String {
+        let base = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
+        var randomString: String = ""
+
+        for _ in 0..<length {
+            let randomValue = arc4random_uniform(UInt32(base.count))
+            randomString += "\(base[base.index(base.startIndex, offsetBy: Int(randomValue))])"
+        }
+        return randomString
+    }
+}
+
+
 struct OnboardingSecond_Previews: PreviewProvider {
     static var previews: some View {
         OnboardingSecond()
     }
 }
+
+

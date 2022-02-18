@@ -23,14 +23,14 @@ struct OnboardingFirst: View {
                 .frame(width: 200, height: 150, alignment: .center)
                 .multilineTextAlignment(.center)
 //                .background(.red)
-                .offset(x: 0, y: -130)
+                .offset(x: 0, y: -200)
             
             Text("Please, Choose your language")
                 .font(Font.system(.title3, design: .rounded).weight(.regular))
                 .frame(width: 200, height: 100, alignment: .center)
                 .multilineTextAlignment(.center)
 //                .background(.red)
-                .offset(x: 0, y: -120)
+                .offset(x: 0, y: -160)
             
             VStack {
 //                Picker("Please choose your language", selection: $selectedLanguage) {
