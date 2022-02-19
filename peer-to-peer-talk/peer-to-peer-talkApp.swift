@@ -9,11 +9,10 @@ import SwiftUI
 
 @main
 struct peer_to_peer_talkApp: App {
-    @StateObject var chatHelper = ChatHelper()
     
     var body: some Scene {
         WindowGroup {
-            OnboardingFirst()
+			MainView()
         }
     }
 }

@@ -14,7 +14,7 @@ protocol MCServiceManagerDelegate {
     
 }
 
-class MCServiceManager: NSObject {
+class MCServiceManager: NSObject, ObservableObject {
     
     // name of service for this app
     private let MCServiceType = "peerToPeerChat"
@@ -66,19 +66,22 @@ class MCServiceManager: NSObject {
         self.mcServiceAdvertiser.stopAdvertisingPeer()
         self.mcServiceBrowser.stopBrowsingForPeers()
     }
-    
-    func send(message: String) {
-        NSLog("%@", "sendMessage: \(message) to \(mcSession.connectedPeers.count) peers,\(mcSession.connectedPeers.self)")
-        
-        if mcSession.connectedPeers.count > 0 {
-            do {
-                try self.mcSession.send(message.data(using: .utf8)!, toPeers: mcSession.connectedPeers, with: .reliable)
-            }
-            catch let error {
-                NSLog("%@", "Error for sending: \(error)")
-            }
-        }
-    }
+}
+
+extension MCServiceManager {
+	
+	func send(message: String) {
+		NSLog("%@", "sendMessage: \(message) to \(mcSession.connectedPeers.count) peers,\(mcSession.connectedPeers.self)")
+		
+		if mcSession.connectedPeers.count > 0 {
+			do {
+				try self.mcSession.send(message.data(using: .utf8)!, toPeers: mcSession.connectedPeers, with: .reliable)
+			}
+			catch let error {
+				NSLog("%@", "Error for sending: \(error)")
+			}
+		}
+	}
 }
 
 extension MCServiceManager: MCNearbyServiceAdvertiserDelegate {
