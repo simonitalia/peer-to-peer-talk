@@ -21,7 +21,7 @@ struct OnboardingSecond: View {
     
     var body: some View {
         
-        let randomString = String.random()
+        let randomString = String().random()
 
         
         NavigationView{
@@ -115,19 +115,19 @@ struct BigPaddedButtonStyle2: ButtonStyle {
 
 
 
-extension String {
-
-    static func random(length: Int = 6) -> String {
-        let base = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
-        var randomString: String = ""
-
-        for _ in 0..<length {
-            let randomValue = arc4random_uniform(UInt32(base.count))
-            randomString += "\(base[base.index(base.startIndex, offsetBy: Int(randomValue))])"
-        }
-        return randomString
-    }
-}
+//extension String {
+//
+//    static func random(length: Int = 6) -> String {
+//        let base = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
+//        var randomString: String = ""
+//
+//        for _ in 0..<length {
+//            let randomValue = arc4random_uniform(UInt32(base.count))
+//            randomString += "\(base[base.index(base.startIndex, offsetBy: Int(randomValue))])"
+//        }
+//        return randomString
+//    }
+//}
 
 
 struct OnboardingSecond_Previews: PreviewProvider {

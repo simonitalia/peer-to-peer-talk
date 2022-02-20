@@ -8,8 +8,8 @@
 import Foundation
 
 struct Message: Hashable, Identifiable {
+	let id = UUID()
     var content: String
-    var user: User
+    let user: User
     var isReceived: Bool
-    let id = UUID()
 }

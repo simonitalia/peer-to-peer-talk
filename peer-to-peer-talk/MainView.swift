@@ -8,18 +8,20 @@
 import SwiftUI
 
 struct MainView: View {
+	@EnvironmentObject var user: User
 	@State var selectedTabViewItem = 0
 
     var body: some View {
 		
 		TabView(selection: $selectedTabViewItem) {
-			PeopleView()
+			
+			PeerBrowserView(mcServiceManager: MCServiceManager(user: user))
 				.tabItem {
 					Label("People", systemImage: "network.badge.shield.half.filled")
 				}
 				.tag(0)
 			
-			ChatViewScreen()
+			ChatView()
 				.tabItem {
 					Label("Chat", systemImage: "bubble.left.and.bubble.right.fill")
 				}
@@ -36,6 +38,6 @@ struct MainView: View {
 
 struct MainView_Previews: PreviewProvider {
     static var previews: some View {
-		MainView()
+		MainView().environmentObject(User())
     }
 }

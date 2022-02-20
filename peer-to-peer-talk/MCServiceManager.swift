@@ -19,12 +19,12 @@ class MCServiceManager: NSObject, ObservableObject {
 	enum ServiceType {
 		static let name = "peerToPeerTalk"
 	}
-    
+	
     // name of service for this app
 	private let MCServiceType = ServiceType.name
     
     // identifies each user uniquely in a session
-    private let peerId = MCPeerID(displayName: UIDevice.current.name)
+	private let peerId: MCPeerID
     
     /*
         * used when looking for sessions,
@@ -52,7 +52,8 @@ class MCServiceManager: NSObject, ObservableObject {
     
     var delegate: MCServiceManagerDelegate?
     
-    override init() {
+	init(user: User) {
+		self.peerId = MCPeerID(displayName: user.name)
         self.mcServiceAdvertiser = MCNearbyServiceAdvertiser(peer: peerId, discoveryInfo: nil, serviceType: MCServiceType)
         
         self.mcServiceBrowser = MCNearbyServiceBrowser(peer: peerId, serviceType: MCServiceType)

@@ -13,4 +13,17 @@ extension String: Identifiable {
     public var id: Int {
         return hash
     }
+	
+	func random() -> String {
+		let base = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
+		var randomString: String = ""
+		let length = 6
+
+		for _ in 0..<length {
+			let randomValue = arc4random_uniform(UInt32(base.count))
+			randomString += "\(base[base.index(base.startIndex, offsetBy: Int(randomValue))])"
+		}
+		
+		return randomString
+	}
 }
