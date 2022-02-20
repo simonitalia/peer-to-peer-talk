@@ -8,17 +8,17 @@
 import SwiftUI
 
 struct OnboardingView: View {
-	@Environment(\.presentationMode) var presentationMode
-	
 	@EnvironmentObject var user: User
+	@Binding var isPresented: Bool
+	
 	@State private var isShowingOnboardingFirst = true
 	
 	private var title: String {
 		return isShowingOnboardingFirst ? "Welcome to P2P Talk" : "Confirm Display Name"
-		
 	}
 	
 	var body: some View {
+	
 		NavigationView {
 			
 			ZStack {
@@ -79,8 +79,7 @@ struct OnboardingView: View {
 					
 					//continue button
 					Button(action: {
-						presentationMode.wrappedValue.dismiss()
-						user.hasCompletedOnboarding = true
+						user.hasCompletedOnboarding.toggle()
 					}) {
 						Text("Continue")
 					}
@@ -99,11 +98,17 @@ struct OnboardingView: View {
 			}
 			.navigationTitle(title)
 		}
+		
+		.onChange(of: user.hasCompletedOnboarding) { newValue in
+			if newValue {
+				isPresented = !newValue
+			}
+		}
 	}
 }
 
 struct OnboardingView_Previews: PreviewProvider {
     static var previews: some View {
-		OnboardingView().environmentObject(User())
+		OnboardingView(isPresented: .constant(true)).environmentObject(User())
     }
 }
