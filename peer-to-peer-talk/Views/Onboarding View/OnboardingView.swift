@@ -60,8 +60,6 @@ struct OnboardingView: View {
 						Text("Continue")
 					}
 					.buttonStyle(BigPaddedButtonStyle())
-
-
 				}
 				.opacity(isShowingOnboardingFirst ? 1 : 0)
 			
@@ -101,22 +99,6 @@ struct OnboardingView: View {
 			}
 			.navigationTitle(title)
 		}
-	}
-}
-
-struct BigPaddedButtonStyle: ButtonStyle {
-	
-	let steelGray = Color(white: 0.8)
-	func makeBody(configuration: Configuration) -> some View {
-		return configuration
-			.label
-			.foregroundColor(configuration.isPressed ? .gray : .black)
-			.padding(EdgeInsets(top: 0, leading: 110, bottom: 0, trailing: 110))
-			.frame(minWidth: 0, maxWidth: .infinity)
-			.padding()
-			.background(steelGray)
-			.cornerRadius(10)
-			.padding(10)
 	}
 }
 
