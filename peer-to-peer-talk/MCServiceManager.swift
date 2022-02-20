@@ -15,9 +15,13 @@ protocol MCServiceManagerDelegate {
 }
 
 class MCServiceManager: NSObject, ObservableObject {
+	
+	enum ServiceType {
+		static let name = "peerToPeerTalk"
+	}
     
     // name of service for this app
-    private let MCServiceType = "peerToPeerChat"
+	private let MCServiceType = ServiceType.name
     
     // identifies each user uniquely in a session
     private let peerId = MCPeerID(displayName: UIDevice.current.name)

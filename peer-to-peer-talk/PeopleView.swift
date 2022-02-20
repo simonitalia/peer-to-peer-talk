@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct PeopleView: View {
-	let mcServiceManager = MCServiceManager()
+	@EnvironmentObject var mcServiceManager: MCServiceManager
 	
     var body: some View {
 		NavigationView {
@@ -19,6 +19,6 @@ struct PeopleView: View {
 
 struct PeopleView_Previews: PreviewProvider {
     static var previews: some View {
-		PeopleView()
+		PeopleView().environmentObject(MCServiceManager())
     }
 }
