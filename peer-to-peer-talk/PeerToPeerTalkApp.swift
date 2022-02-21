@@ -9,11 +9,12 @@ import SwiftUI
 
 @main
 struct PeerToPeerTalkApp: App {
-	@StateObject var user = User()
+	@StateObject var user = User.getUser()
 	
     var body: some Scene {
         WindowGroup {
-			MainView().environmentObject(user)
+			MainView(mcServiceManager: MCServiceManager(user: user))
+				.environmentObject(user)
         }
     }
 }
