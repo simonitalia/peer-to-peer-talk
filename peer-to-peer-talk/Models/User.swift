@@ -7,11 +7,11 @@
 
 import SwiftUI
 
-class User: Hashable, Equatable, ObservableObject {
+class User: Hashable, Equatable, ObservableObject, Codable {
 
 	let name: String
-	let deviceName = UIDevice.current.name
-	let isCurrentUser: Bool
+	var deviceName = UIDevice.current.name
+	let isCurrentUser: Bool // for testing with fake data source
 	@Published var hasCompletedOnboarding = false
 	
 	init (isCurrentUser: Bool = false) {
@@ -19,32 +19,38 @@ class User: Hashable, Equatable, ObservableObject {
 		self.isCurrentUser = isCurrentUser
 	}
 	
-	// Hashable protocol conformance
+	// Hashable conformance
 	func hash(into hasher: inout Hasher) {
 		hasher.combine(name)
 	}
 	
-	//Equatable protocol conformance
+	//Equatable conformance
 	static func == (lhs: User, rhs: User) -> Bool {
 		return lhs.name == rhs.name
 	}
-}
+	
+	//Codable conformance
+	enum CodingKeys: CodingKey {
+			case name, deviceName, isCurrentUser, hasCompletedOnboarding
+	}
 
+	required init(from decoder: Decoder) throws {
+		let container = try decoder.container(keyedBy: CodingKeys.self)
+		self.name = try container.decode(String.self, forKey: .name)
+		self.deviceName = try container.decode(String.self, forKey: .deviceName)
+		self.isCurrentUser = try container.decode(Bool.self, forKey: .isCurrentUser)
+		self.hasCompletedOnboarding = try container.decode(Bool.self, forKey: .hasCompletedOnboarding)
+	}
 
-struct DataSource {
-    static let firstUser = User()
-    static var secondUser = User(isCurrentUser: true)
-    static let messages = [
-        Message(content: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.", user: DataSource.firstUser, isReceived: true),
-        Message(content: "Lacus luctus accumsan tortor posuere ac ut consequat.", user: DataSource.secondUser, isReceived: true),
-        Message(content: "😇", user: DataSource.firstUser, isReceived: true),
-        Message(content: "Vitae tortor condimentum lacinia quis vel eros donec ac.", user: DataSource.firstUser, isReceived: true),
-        Message(content: "Aliquam sem et tortor consequat id porta nibh venenatis.", user: DataSource.secondUser, isReceived: true),
-        Message(content: "Ante in nibh mauris cursus mattis molestie a.", user: DataSource.firstUser, isReceived: true),
-        
-        Message(content: "😇", user: DataSource.firstUser, isReceived: true),
-        Message(content: "Vitae tortor condimentum lacinia quis vel eros donec ac.", user: DataSource.firstUser, isReceived: true),
-        Message(content: "Aliquam sem et tortor consequat id porta nibh venenatis.", user: DataSource.secondUser, isReceived: true),
-        Message(content: "Ante in nibh mauris cursus mattis molestie a.", user: DataSource.firstUser, isReceived: true)
-    ]
+	func encode(to encoder: Encoder) throws {
+		var container = encoder.container(keyedBy: CodingKeys.self)
+		try container.encode(self.name, forKey: .name)
+		try container.encodeIfPresent(self.deviceName, forKey: .deviceName)
+		try container.encodeIfPresent(self.isCurrentUser, forKey: .isCurrentUser)
+		try container.encodeIfPresent(self.hasCompletedOnboarding, forKey: .hasCompletedOnboarding)
+	}
+	
+	class func getUser() -> User {
+		return User()
+	}
 }
