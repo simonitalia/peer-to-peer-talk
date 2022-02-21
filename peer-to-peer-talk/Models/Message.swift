@@ -8,19 +8,20 @@
 import Foundation
 
 struct Message: Hashable, Identifiable, Codable {
-	var id = UUID()
+    let id: UUID
     let content: String
     let author: User
 	
 	init(text content: String, user author: User) {
-		self.content = content
+        self.id = UUID()
+        self.content = content
 		self.author = author
 	}
 	
 	static func getSampleMessage() -> Message {
 		return Message(
-				text: "Sample Text",
-				user: User.getUser()
+            text: "Sample Text",
+            user: User.getUser()
 		)
 	}
 }
