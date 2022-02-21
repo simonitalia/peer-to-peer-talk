@@ -11,11 +11,16 @@ struct Message: Hashable, Identifiable, Codable {
 	var id = UUID()
     let content: String
     let author: User
-    var isReceived: Bool //for testing with fake data source
 	
-	init(text content: String, user author: User, isReceived: Bool = false) {
+	init(text content: String, user author: User) {
 		self.content = content
 		self.author = author
-		self.isReceived = isReceived
+	}
+	
+	static func getSampleMessage() -> Message {
+		return Message(
+				text: "Sample Text",
+				user: User.getUser()
+		)
 	}
 }

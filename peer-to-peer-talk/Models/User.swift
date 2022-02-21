@@ -11,12 +11,10 @@ class User: Hashable, Equatable, ObservableObject, Codable {
 
 	let name: String
 	var deviceName = UIDevice.current.name
-	let isCurrentUser: Bool // for testing with fake data source
 	@Published var hasCompletedOnboarding = false
 	
-	init (isCurrentUser: Bool = false) {
+	init () {
 		self.name = String().random()
-		self.isCurrentUser = isCurrentUser
 	}
 	
 	// Hashable conformance
@@ -38,7 +36,6 @@ class User: Hashable, Equatable, ObservableObject, Codable {
 		let container = try decoder.container(keyedBy: CodingKeys.self)
 		self.name = try container.decode(String.self, forKey: .name)
 		self.deviceName = try container.decode(String.self, forKey: .deviceName)
-		self.isCurrentUser = try container.decode(Bool.self, forKey: .isCurrentUser)
 		self.hasCompletedOnboarding = try container.decode(Bool.self, forKey: .hasCompletedOnboarding)
 	}
 
@@ -46,7 +43,6 @@ class User: Hashable, Equatable, ObservableObject, Codable {
 		var container = encoder.container(keyedBy: CodingKeys.self)
 		try container.encode(self.name, forKey: .name)
 		try container.encodeIfPresent(self.deviceName, forKey: .deviceName)
-		try container.encodeIfPresent(self.isCurrentUser, forKey: .isCurrentUser)
 		try container.encodeIfPresent(self.hasCompletedOnboarding, forKey: .hasCompletedOnboarding)
 	}
 	
