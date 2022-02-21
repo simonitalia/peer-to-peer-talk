@@ -22,16 +22,12 @@ struct MainView: View {
 				TabView(selection: $selectedTabViewItem) {
 					
 					PeerBrowserView()
-						.environmentObject(mcServiceManager)
-						.environmentObject(user)
 						.tabItem {
 							Label("People Nearby", systemImage: "network")
 						}
 						.tag(0)
 					
 					ChatView()
-						.environmentObject(mcServiceManager)
-						.environmentObject(user)
 						.tabItem {
 							Label("Chat", systemImage: "bubble.left.and.bubble.right.fill")
 						}
@@ -50,8 +46,9 @@ struct MainView: View {
 		}
 		
 		.sheet(isPresented: $presentOnboardingView) {
-				OnboardingView(isPresented: $presentOnboardingView).environmentObject(user)
+            OnboardingView(isPresented: $presentOnboardingView)
 		}
+        .environmentObject(mcServiceManager)
     }
 }
 
