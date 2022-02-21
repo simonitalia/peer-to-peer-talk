@@ -9,20 +9,22 @@ import SwiftUI
 
 struct PeerBrowserView: View {
 	@EnvironmentObject var user: User
-	@StateObject var mcServiceManager: MCServiceManager
-
+	@EnvironmentObject var mcServiceManager: MCServiceManager
+	
+	@State var presentMCBrowserViewController = false
+	
     var body: some View {
-		NavigationView {
-			ZStack {
-				Text("PeopleView")
-			}
-			.navigationTitle("People Nearby")
+
+		ZStack {
+			mcServiceManager.presentMCPeerBrowserViewController(serviceManager: mcServiceManager)
 		}
-    }
+	}
 }
 
 struct PeerBrowserView_Previews: PreviewProvider {
     static var previews: some View {
-		PeerBrowserView(mcServiceManager: MCServiceManager(user: User())).environmentObject(User())
+		PeerBrowserView()
+			.environmentObject(User())
+			.environmentObject(MCServiceManager(user: User()))
     }
 }
