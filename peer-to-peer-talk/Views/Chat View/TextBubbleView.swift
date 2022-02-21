@@ -8,8 +8,9 @@
 import SwiftUI
 
 struct TextBubbleView: View {
-    
-    var message: Message
+	
+	var user: User
+	var message: Message
     
     var body: some View {
         VStack {
@@ -17,19 +18,21 @@ struct TextBubbleView: View {
                 .font(.system(size: 15, weight: .semibold))
                 .foregroundColor(.white)
                 .padding(.all)
-                .background(message.user.isCurrentUser ? Color("currentUserBubbleColor") : Color("BubbleColor"))
+				.background(message.author.name == user.name ? Color("currentUserBubbleColor") : Color("BubbleColor"))
                 .clipShape(RoundedRectangle(cornerRadius: 15))
         }
-        .frame(maxWidth: .infinity, alignment: message.isReceived ? .leading : .trailing)
+        .frame(maxWidth: .infinity, alignment: message.author.name != user.name ? .leading : .trailing)
         .padding(.all)
         .id(message.id)
     }
 }
 
-
 struct TextBubbleView_Previews: PreviewProvider {
     static var previews: some View {
-        TextBubbleView(message: DataSource.messages[0])
+		TextBubbleView(
+			user: User.getUser(),
+			message: Message.getSampleMessage()
+		)
     }
 }
 

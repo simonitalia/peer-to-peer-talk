@@ -8,12 +8,13 @@
 import SwiftUI
 
 @main
-struct peer_to_peer_talkApp: App {
-    @StateObject var chatHelper = ChatHelper()
-    
+struct PeerToPeerTalkApp: App {
+	@StateObject var user = User.getUser()
+	
     var body: some Scene {
         WindowGroup {
-            OnboardingFirst()
+			MainView(mcServiceManager: MCServiceManager(user: user))
+				.environmentObject(user)
         }
     }
 }
