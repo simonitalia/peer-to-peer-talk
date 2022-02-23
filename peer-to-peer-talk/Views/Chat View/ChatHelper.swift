@@ -10,9 +10,11 @@ import Combine
 
 class ChatHelper: ObservableObject {
 	var didChange = PassthroughSubject<Void, Never>()
-	@Published var realTimeMessages = FakeDataSource.messages
+//    @Published var realTimeMessages = FakeDataSource.messages
+    @Published var realTimeMessages = [Message]()
 
-	func sendMessage(_ chatMessage: FakeMessage) {
+//    func sendMessage(_ chatMessage: FakeMessage) {
+    func sendMessage(_ chatMessage: Message) {
 		realTimeMessages.append(chatMessage)
 		didChange.send(())
 	}
@@ -79,9 +81,18 @@ struct FakeUser {
 	let isCurrentUser: Bool
 }
 
-struct FakeMessage: Identifiable {
+struct FakeMessage: Identifiable, Hashable, Equatable {
+    
 	var id = UUID()
 	let content: String
 	let user: FakeUser
 	let isReceived: Bool
+    
+    func hash(into hasher: inout Hasher) {
+        hasher.combine(content)
+    }
+    
+    static func == (lhs: FakeMessage, rhs: FakeMessage) -> Bool {
+        return lhs.content == rhs.content
+    }
 }

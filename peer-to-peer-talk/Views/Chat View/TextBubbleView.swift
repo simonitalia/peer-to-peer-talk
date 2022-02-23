@@ -13,16 +13,19 @@ struct TextBubbleView: View {
 	var message: Message
     
     var body: some View {
-        VStack {
+        VStack(alignment: message.author.name != user.name ? .trailing : .leading, spacing: 2) {
+            Text(message.author.name)
+                .font(.system(size: 10, weight: .medium))
+                .foregroundColor(.black)
             Text(message.content)
-                .font(.system(size: 15, weight: .semibold))
+                .font(.system(size: 20, weight: .regular))
                 .foregroundColor(.white)
                 .padding(.all)
 				.background(message.author.name == user.name ? Color("currentUserBubbleColor") : Color("BubbleColor"))
                 .clipShape(RoundedRectangle(cornerRadius: 15))
         }
-        .frame(maxWidth: .infinity, alignment: message.author.name != user.name ? .leading : .trailing)
-        .padding(.all)
+
+        
         .id(message.id)
     }
 }
