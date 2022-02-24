@@ -39,14 +39,13 @@ struct MainView: View {
 						}
 						.tag(2)
 				}
-			}
+            
+            } else {
+                OnboardingView(isPresented: $presentOnboardingView)
+            }
 		}
 		.onAppear {
 			presentOnboardingView = !user.hasCompletedOnboarding
-		}
-		
-		.sheet(isPresented: $presentOnboardingView) {
-            OnboardingView(isPresented: $presentOnboardingView)
 		}
         .environmentObject(mcServiceManager)
     }
