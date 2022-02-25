@@ -53,7 +53,11 @@ struct MainView: View {
 
 struct MainView_Previews: PreviewProvider {
     static var previews: some View {
-		MainView(mcServiceManager: MCServiceManager(user: User.getUser()))
-			.environmentObject(User.getUser())
+        let user = User.getUser()
+		MainView(
+            mcServiceManager: MCServiceManager(
+            user: user
+            )
+        ).environmentObject(user)
     }
 }

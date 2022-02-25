@@ -13,8 +13,11 @@ struct PeerToPeerTalkApp: App {
 	
     var body: some Scene {
         WindowGroup {
-			MainView(mcServiceManager: MCServiceManager(user: user))
-				.environmentObject(user)
+			MainView(
+                mcServiceManager: MCServiceManager(
+                    user: user
+                )
+            ).environmentObject(user)
         }
     }
 }
