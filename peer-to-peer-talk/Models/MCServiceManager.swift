@@ -10,7 +10,7 @@ import SwiftUI
 import UIKit
 
 protocol MCServiceManagerDelegate {
-    func onDidReceiveInvitation(from peer: MCPeerID, invitationHandler: @escaping (Bool, MCSession?) -> Void)
+    func onDidReceiveInvitation(from peerId: MCPeerID, invitationHandler: @escaping (Bool, MCSession?) -> Void)
 }
 
 class MCServiceManager: NSObject, ObservableObject {
