@@ -41,16 +41,15 @@ struct MainView: View {
 						}
 						.tag(2)
 				}
-			}
+            
+            } else {
+                OnboardingView(isPresented: $presentOnboardingView)
+            }
 		}
         
         
 		.onAppear {
 			presentOnboardingView = !user.hasCompletedOnboarding
-		}
-		
-		.sheet(isPresented: $presentOnboardingView) {
-            OnboardingView(isPresented: $presentOnboardingView)
 		}
         .environmentObject(mcServiceManager)
         .environment(\.locale, .init(identifier: self.languageIdentifier))
@@ -59,7 +58,10 @@ struct MainView: View {
 
 struct MainView_Previews: PreviewProvider {
     static var previews: some View {
-        MainView(mcServiceManager: MCServiceManager(user: User.getUser()))
-			.environmentObject(User.getUser())
+		MainView(
+            mcServiceManager: MCServiceManager(
+                user: User.getUser()
+            )
+        ).environmentObject(User.getUser())
     }
 }

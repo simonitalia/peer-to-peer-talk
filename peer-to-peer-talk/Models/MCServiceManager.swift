@@ -7,146 +7,116 @@
 
 import MultipeerConnectivity
 import SwiftUI
+import UIKit
 
 protocol MCServiceManagerDelegate {
-    func onConnectedPeersChanged(manager: MCServiceManager, connectedPeers: [String])
-	func onNewMessageReceived(manager: MCServiceManager, message: Message)
+    func onDidReceiveInvitation(from peer: MCPeerID, invitationHandler: @escaping (Bool, MCSession?) -> Void)
 }
 
 class MCServiceManager: NSObject, ObservableObject {
 	
-	// name of service for this app
 	enum ServiceType {
 		static let name = "peerToPeerTalk"
 	}
+    
+	@Published private(set) var receivedMessages = [Message]()
 	
-	@Published var connectedPeers = [String]()
-	@Published var receivedMessages = [Message]()
-	
-    // identifies each user uniquely in a session
-	private let peerId: MCPeerID
-    
-    /*
-        * used when looking for sessions,
-        * shows nearby users and allow them to join with us
-    */
-    private let serviceBrowser: MCNearbyServiceBrowser
-    
-    /*
-       * used when creating a session,
-       * informs nearby peers we are here and handles invitations
-     */
-    private let serviceAdvertiser: MCNearbyServiceAdvertiser
-    
-    // handles all multipeer connectivity
-    lazy var session : MCSession = {
-        let session = MCSession(
-            peer: self.peerId,
-            securityIdentity: nil,
-            encryptionPreference: .required
-        )
-        
-        session.delegate = self
-        return session
-    }()
+	let peerId: MCPeerID
+    private let advertiser: MCNearbyServiceAdvertiser
+    let session: MCSession
     
     var delegate: MCServiceManagerDelegate?
     
-	init(user: User) {
+    init(user: User) {
 		self.peerId = MCPeerID(displayName: user.name)
-		self.serviceAdvertiser = MCNearbyServiceAdvertiser(peer: peerId, discoveryInfo: nil, serviceType: ServiceType.name)
-        
-        self.serviceBrowser = MCNearbyServiceBrowser(peer: peerId, serviceType: ServiceType.name)
+
+        self.session = MCSession(
+            peer: peerId,
+            securityIdentity: nil,
+            encryptionPreference: .required
+        )
+
+        self.advertiser = MCNearbyServiceAdvertiser(
+            peer: peerId,
+            discoveryInfo: nil,
+            serviceType: ServiceType.name
+        )
         
         super.init()
-        
-        self.serviceAdvertiser.delegate = self
-        self.serviceAdvertiser.startAdvertisingPeer()
-        
-        self.serviceBrowser.delegate = self
-        self.serviceBrowser.startBrowsingForPeers()
+        self.session.delegate = self
+        self.advertiser.delegate = self
     }
 
-    deinit {
-        self.serviceAdvertiser.stopAdvertisingPeer()
-        self.serviceBrowser.stopBrowsingForPeers()
+    func onPresentMCPeerBrowserViewController() {
+        disconnectFromSession()
+        advertiser.startAdvertisingPeer()
     }
-	
-	func presentMCPeerBrowserViewController(serviceManager: MCServiceManager) -> MCPeerBrowserViewController {
-		return MCPeerBrowserViewController(serviceManager: serviceManager)
-	}
-	
-	func send(message: Message) {
-		NSLog("%@", "sendMessage: \(message) to \(session.connectedPeers.count) peers,\(session.connectedPeers.self)")
-		
-		if session.connectedPeers.count > 0 {
-			do {
-				let data = try JSONEncoder().encode(message)
-				try self.session.send(data, toPeers: session.connectedPeers, with: .reliable)
-		
-			} catch let error {
-				NSLog("%@", "Error sending message: \(error)")
-			}
-		}
-	}
+    
+    func onDismissMCPeerBrowserViewController() {
+        advertiser.stopAdvertisingPeer()
+    }
+    
+    func disconnectFromSession() {
+        session.disconnect() // ensure no existing sessions
+    }
+    
+    func send(message: Message) {
+        if !session.connectedPeers.isEmpty {
+            do {
+                let data = try JSONEncoder().encode(message)
+                try session.send(data, toPeers: session.connectedPeers, with: .reliable)
+
+            } catch let error {
+                print("MCServiceManager.send errror: \(error)")
+            }
+        }
+    }
 }
 
 extension MCServiceManager: MCNearbyServiceAdvertiserDelegate {
-    
+
     func advertiser(_ advertiser: MCNearbyServiceAdvertiser, didNotStartAdvertisingPeer error: Error) {
-        NSLog("%@", "didNotStartAdvertisingPeer: \(error)")
+        print("MCServiceManager.advertiser didNotStartAdvertisingPeer: \(error)")
     }
-    
+
     func advertiser(_ advertiser: MCNearbyServiceAdvertiser, didReceiveInvitationFromPeer peerID: MCPeerID, withContext context: Data?, invitationHandler: @escaping (Bool, MCSession?) -> Void) {
-		invitationHandler(true, self.session)
-    }
-}
-
-/*
-    * for customized browsing
- */
-extension MCServiceManager: MCNearbyServiceBrowserDelegate {
-
-    func browser(_ browser: MCNearbyServiceBrowser, didNotStartBrowsingForPeers error: Error) {
-        NSLog("%@", "didNotStartBrowsingForPeers: \(error)")
-    }
-
-    func browser(_ browser: MCNearbyServiceBrowser, foundPeer peerID: MCPeerID, withDiscoveryInfo info: [String : String]?) {
-        NSLog("%@", "foundPeer: \(peerID)")
-        NSLog("%@", "invitePeer: \(peerID)")
-        browser.invitePeer(peerID, to: self.session, withContext: nil, timeout: 60)
-    }
-
-    func browser(_ browser: MCNearbyServiceBrowser, lostPeer peerID: MCPeerID) {
-        NSLog("%@", "lostPeer: \(peerID)")
+        print("MCServiceManager.advertiser didReceiveInvitationFromPeer: \(peerID)")
+        
+        // peer invitation handler
+        delegate?.onDidReceiveInvitation(from: peerID, invitationHandler: invitationHandler)
     }
 }
 
 extension MCServiceManager: MCSessionDelegate {
     func session(_ session: MCSession, peer peerID: MCPeerID, didChange state: MCSessionState) {
-		NSLog("%@", "peer \(peerID) didChangeState: \(state.rawValue)")
-		
-		let peers = session.connectedPeers.map { $0.displayName }
-		
-		DispatchQueue.main.async {
-			self.connectedPeers = peers
-		}
-		self.delegate?.onConnectedPeersChanged(manager: self, connectedPeers:
-			peers)
+        print("MCServiceManager.session peer \(peerID.displayName) didChangeState: \(state.rawValue)\npeers in session \(session.connectedPeers.count)")
+        
+        switch state {
+            case .connected:
+                print("Connected with peer: \(peerID.displayName)")
+
+            case .connecting:
+                print("Connecting to peer: \(peerID.displayName)")
+
+            case .notConnected:
+                print("Not Connected with peer: \(peerID.displayName)")
+
+            @unknown default:
+                print("Unknown state received: \(peerID.displayName)")
+            }
     }
     
+    // Data Received from peers
     func session(_ session: MCSession, didReceive data: Data, fromPeer peerID: MCPeerID) {
         
 		do {
 			let message = try JSONDecoder().decode(Message.self, from: data)
-			
-			DispatchQueue.main.async {
+            DispatchQueue.main.async { [unowned self] in
 				self.receivedMessages.append(message)
 			}
-			self.delegate?.onNewMessageReceived(manager: self, message: message)
 			
 		} catch let error {
-			print("MCServiceManager, Decoding received message error \(error)")
+			print("MCServiceManager.session didReceive error: \(error)")
 		}
     }
     
@@ -163,32 +133,37 @@ extension MCServiceManager: MCSessionDelegate {
 }
 
 
-//----
+// MARK: - Multipeer Connectivity Peer Browser ViewController
 
 struct MCPeerBrowserViewController: UIViewControllerRepresentable {
     typealias UIViewControllerType = MCBrowserViewController
-
-	// identifies each user uniquely in a session
+    
+    @Binding var isPresented: Bool
 	private let serviceManager: MCServiceManager
 
-	init(serviceManager: MCServiceManager) {
+    init(serviceManager: MCServiceManager, isPresented: Binding<Bool>) {
 		self.serviceManager = serviceManager
+        self._isPresented = isPresented
 	}
-
-	class Coordinator: NSObject, MCBrowserViewControllerDelegate {
-		var parent: MCPeerBrowserViewController
+    
+	class Coordinator: NSObject, MCBrowserViewControllerDelegate, MCAdvertiserAssistantDelegate {
+		private var parent: MCPeerBrowserViewController
 
 		init(_ parent: MCPeerBrowserViewController) {
 			self.parent = parent
+            self.parent.serviceManager.onPresentMCPeerBrowserViewController()
 		}
 
 		// MCBrowserViewControllerDelegate methods
 		func browserViewControllerDidFinish(_ browserViewController: MCBrowserViewController) {
-			browserViewController.dismiss(animated: true)
+            parent.isPresented.toggle()
+            parent.serviceManager.onDismissMCPeerBrowserViewController()
 		}
 
 		func browserViewControllerWasCancelled(_ browserViewController: MCBrowserViewController) {
-			browserViewController.dismiss(animated: true)
+            parent.isPresented.toggle()
+            parent.serviceManager.disconnectFromSession()
+            parent.serviceManager.onDismissMCPeerBrowserViewController()
 		}
 	}
 
@@ -197,16 +172,16 @@ struct MCPeerBrowserViewController: UIViewControllerRepresentable {
 		return Coordinator(self)
 	}
 
-	func makeUIViewController(context: Context) -> MCBrowserViewController {
-	   let mcBrowser = MCBrowserViewController(
-		serviceType: MCServiceManager.ServiceType.name,
+    func makeUIViewController(context: Context) -> MCBrowserViewController {
+       
+	   let vc = MCBrowserViewController(
+        serviceType: MCServiceManager.ServiceType.name,
 		session: serviceManager.session
 	   )
-
-		mcBrowser.delegate = context.coordinator
-		return mcBrowser
+        
+		vc.delegate = context.coordinator
+		return vc
 	}
-
-	func updateUIViewController(_ uiViewController: MCBrowserViewController, context: Context) {
-	}
+    
+	func updateUIViewController(_ uiViewController: MCBrowserViewController, context: Context) {}
 }

@@ -6,26 +6,78 @@
 //
 
 import SwiftUI
+import MultipeerConnectivity
 
 struct PeerBrowserView: View {
-    @EnvironmentObject var user: User
-    @EnvironmentObject var mcServiceManager: MCServiceManager
+	@EnvironmentObject var user: User
+	@EnvironmentObject var mcServiceManager: MCServiceManager
     
-    @State var presentMCBrowserViewController = false
+    @State private var isPresententingMCBrowserViewController: Bool = false
+    @State private var isPresentingInvitationFromPeerAlert: Bool = false
+    
+    // Session Management when peers request to connect
+    @State private var invitationResponseHandler: ((Bool, MCSession?) -> Void)!
     
     var body: some View {
-        
-        ZStack {
-            mcServiceManager.presentMCPeerBrowserViewController(serviceManager: mcServiceManager)
+        NavigationView {
+            ZStack {
+                Text("PeerBrowser")
+            }
+            
+            // Navigation
+            .navigationTitle("Display Name: \(user.name)")
+            .toolbar {
+                Button("Start New Chat") {
+                    isPresententingMCBrowserViewController.toggle()
+                }
+            }
         }
         
+        .onAppear {
+            mcServiceManager.delegate = self
+                // to be notified of invitation requests
+            if mcServiceManager.session.connectedPeers.isEmpty {
+                isPresententingMCBrowserViewController.toggle()
+            }
+        }
+        
+        // present peer browser view controller
+        .sheet(isPresented: $isPresententingMCBrowserViewController) {
+            MCPeerBrowserViewController(
+                serviceManager: mcServiceManager,
+                isPresented: $isPresententingMCBrowserViewController
+            ).interactiveDismissDisabled() //prevent swipe to dismiss
+            
+            // present invitation to chat alert
+            .alert("Invitation Received", isPresented: $isPresentingInvitationFromPeerAlert) {
+                
+                Button("Decline", role: .cancel) {
+                    invitationResponseHandler(false, nil)
+                }
+                
+                Button("Accept") {
+                   invitationResponseHandler(true, mcServiceManager.session)
+                }
+            }
+        }
+    }
+}
+
+extension PeerBrowserView: MCServiceManagerDelegate {
+    func onDidReceiveInvitation(from peer: MCPeerID, invitationHandler: @escaping (Bool, MCSession?) -> Void) {
+        invitationResponseHandler = invitationHandler
+        isPresentingInvitationFromPeerAlert.toggle()
     }
 }
 
 struct PeerBrowserView_Previews: PreviewProvider {
     static var previews: some View {
-        PeerBrowserView()
-            .environmentObject(User())
-            .environmentObject(MCServiceManager(user: User()))
+		PeerBrowserView()
+            .environmentObject(User.getUser())
+			.environmentObject(
+                MCServiceManager(
+                    user: User.getUser()
+                )
+            )
     }
 }
