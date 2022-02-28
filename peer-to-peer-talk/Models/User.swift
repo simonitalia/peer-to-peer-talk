@@ -11,13 +11,11 @@ class User: Hashable, Equatable, ObservableObject, Codable {
 
     let id: UUID
     let name: String
-    let deviceName: String
     @Published var hasCompletedOnboarding: Bool
 	
 	private init() {
         self.id = UUID()
 		self.name = String().random()
-        self.deviceName = UIDevice.current.name
         self.hasCompletedOnboarding = false
 	}
 	
@@ -33,14 +31,13 @@ class User: Hashable, Equatable, ObservableObject, Codable {
 	
 	//Codable conformance
 	enum CodingKeys: CodingKey {
-			case id, name, deviceName, hasCompletedOnboarding
+			case id, name, hasCompletedOnboarding
 	}
 
 	required init(from decoder: Decoder) throws {
 		let container = try decoder.container(keyedBy: CodingKeys.self)
         self.id = try container.decode(UUID.self, forKey: .id)
 		self.name = try container.decode(String.self, forKey: .name)
-		self.deviceName = try container.decode(String.self, forKey: .deviceName)
 		self.hasCompletedOnboarding = try container.decode(Bool.self, forKey: .hasCompletedOnboarding)
 	}
 
@@ -48,7 +45,6 @@ class User: Hashable, Equatable, ObservableObject, Codable {
 		var container = encoder.container(keyedBy: CodingKeys.self)
         try container.encode(self.id, forKey: .id)
 		try container.encode(self.name, forKey: .name)
-		try container.encodeIfPresent(self.deviceName, forKey: .deviceName)
 		try container.encodeIfPresent(self.hasCompletedOnboarding, forKey: .hasCompletedOnboarding)
 	}
     
