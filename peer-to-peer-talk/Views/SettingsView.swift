@@ -8,9 +8,30 @@
 import SwiftUI
 
 struct SettingsView: View {
+    var languages = ["English", "Russian"]
+    @State private var selectedLanguage = "English"
+    @AppStorage("languageIdentifier") private var languageIdentifier = "en"
+    
     var body: some View {
 		NavigationView {
-			Text("SettingsView")
+            VStack {
+                Picker("Please choose the language", selection: $selectedLanguage) {
+                    ForEach(languages, id: \.self) {
+                        Text(LocalizedStringKey($0))
+                    }
+                }
+                Button {
+                    if selectedLanguage == "English" {
+                        self.languageIdentifier = "en"
+                        
+                    } else {
+                        self.languageIdentifier = "ru"
+                    }
+                    
+                } label: {
+                    Text("Select")
+                }
+            }
 		}
     }
 }

@@ -13,6 +13,7 @@ struct OnboardingFirst: View {
     let picker_values = ["Russian", "Chinese", "English", "Italian", "Japanese"]
     @State private var selectedLanguage = "English"
     @State var showingDetail = false
+    @State private var languageIdentifier = "en"
 
     var body: some View {
         NavigationView{
@@ -33,13 +34,13 @@ struct OnboardingFirst: View {
                 .offset(x: 0, y: -160)
             
             VStack {
-//                Picker("Please choose your language", selection: $selectedLanguage) {
-//                                ForEach(picker_values, id: \.self) {
-//                                    Text($0)
-//            }
-//                }
-//                .pickerStyle(.wheel)
-//                .offset(x: 0, y: -20)
+                Picker("Please choose your language", selection: $selectedLanguage) {
+                                ForEach(picker_values, id: \.self) {
+                                    Text($0)
+            }
+                }
+                .pickerStyle(.wheel)
+                .offset(x: 0, y: -20)
                 Button(action: {
     //                                self.showingDetail.toggle()
                     UIApplication.shared.open(URL(string: UIApplication.openSettingsURLString)!, options: [:], completionHandler: nil)

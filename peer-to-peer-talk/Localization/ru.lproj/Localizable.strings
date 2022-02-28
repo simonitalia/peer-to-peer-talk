@@ -14,14 +14,41 @@
 "Please confirm language that you want to use in this app." = "Пожалуйста, подтвердите язык, который будет использоваться в этом приложении.";
 
 /* No comment provided by engineer. */
-"Please, Choose your language" = "Пожалуйста, выберите язык";
+"Please, choose your language" = "Пожалуйста, выберите язык";
 
 /* No comment provided by engineer. */
-"Please, Confirm your display name" = "Пожалуйста, подтвердите ваше Отображаемое имя";
+"Confirm Display Name" = "Подтвердите отображаемое имя";
 
 /* No comment provided by engineer. */
-"This name is unchangeble" = "Это имя неизменяемо";
+"This name is unchangable" = "Это имя неизменяемо";
 
 /* No comment provided by engineer. */
-"Welcome to P2P Chat" = "Добро пожаловать в P2P Чат";
+"Welcome to P2P Talk" = "Добро пожаловать в P2P Talk";
+
+/* No comment provided by engineer. */
+"Select" = "Выбрать";
+
+/* No comment provided by engineer. */
+"English" = "Английский";
+
+/* No comment provided by engineer. */
+"Russian" = "Русский";
+
+///* No comment provided by engineer. */
+"People Nearby" = "Пользователи";
+
+///* No comment provided by engineer. */
+"Chat" = "Чат";
+
+///* No comment provided by engineer. */
+"Settings" = "Настройки";
+
+/////* No comment provided by engineer. */
+"Cancel" = "Отмена";
+
+/////* No comment provided by engineer. */
+"Done" = "Готово";
+
+
+
 

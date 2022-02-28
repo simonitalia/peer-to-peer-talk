@@ -10,6 +10,8 @@ import SwiftUI
 struct MainView: View {
 	@EnvironmentObject var user: User
 	@StateObject var mcServiceManager: MCServiceManager
+    @AppStorage("languageIdentifier") private var languageIdentifier = "en"
+
 	
 	@State private var selectedTabViewItem = 0
 	@State private var presentOnboardingView: Bool = false
@@ -21,7 +23,7 @@ struct MainView: View {
 		
 				TabView(selection: $selectedTabViewItem) {
 					
-					PeerBrowserView()
+                    PeerBrowserView()
 						.tabItem {
 							Label("People Nearby", systemImage: "network")
 						}
@@ -33,7 +35,7 @@ struct MainView: View {
 						}
 						.tag(1)
 					
-					SettingsView()
+                    SettingsView()
 						.tabItem {
 							Label("Settings", systemImage: "gear.circle.fill")
 						}
@@ -41,6 +43,8 @@ struct MainView: View {
 				}
 			}
 		}
+        
+        
 		.onAppear {
 			presentOnboardingView = !user.hasCompletedOnboarding
 		}
@@ -49,12 +53,13 @@ struct MainView: View {
             OnboardingView(isPresented: $presentOnboardingView)
 		}
         .environmentObject(mcServiceManager)
+        .environment(\.locale, .init(identifier: self.languageIdentifier))
     }
 }
 
 struct MainView_Previews: PreviewProvider {
     static var previews: some View {
-		MainView(mcServiceManager: MCServiceManager(user: User.getUser()))
+        MainView(mcServiceManager: MCServiceManager(user: User.getUser()))
 			.environmentObject(User.getUser())
     }
 }
