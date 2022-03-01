@@ -28,7 +28,7 @@ class MCServiceManager: NSObject, ObservableObject {
     var delegate: MCServiceManagerDelegate?
     
     init(user: User) {
-		self.peerId = MCPeerID(displayName: user.name)
+        self.peerId = DataManager.shared.getPeerId(for: user)
 
         self.session = MCSession(
             peer: peerId,
