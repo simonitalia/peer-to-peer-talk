@@ -16,6 +16,7 @@ struct PeerBrowserView: View {
     @State private var isPresentingInvitationFromPeerAlert: Bool = false
     
     // Session Management when peers request to connect
+    @State private var receivedInvitationPeerId: MCPeerID?
     @State private var invitationResponseHandler: ((Bool, MCSession?) -> Void)!
     
     var body: some View {
@@ -48,23 +49,27 @@ struct PeerBrowserView: View {
                 isPresented: $isPresententingMCBrowserViewController
             ).interactiveDismissDisabled() //prevent swipe to dismiss
             
-            // present invitation to chat alert
-            .alert("Invitation Received", isPresented: $isPresentingInvitationFromPeerAlert) {
-                
-                Button("Decline", role: .cancel) {
-                    invitationResponseHandler(false, nil)
+            // present invitation to connect alert
+                .alert(isPresented: $isPresentingInvitationFromPeerAlert) {
+                    
+                    Alert(
+                        title: Text("New Invitation"),
+                        message: Text("\(receivedInvitationPeerId!.displayName) would like to connect"),
+                        primaryButton: .destructive(Text("Decline")) {
+                            invitationResponseHandler(false, nil)
+                        },
+                        secondaryButton: .default(Text("Accept")) {
+                            invitationResponseHandler(true, mcServiceManager.session)
+                        }
+                    )
                 }
-                
-                Button("Accept") {
-                   invitationResponseHandler(true, mcServiceManager.session)
-                }
-            }
         }
     }
 }
 
 extension PeerBrowserView: MCServiceManagerDelegate {
-    func onDidReceiveInvitation(from peer: MCPeerID, invitationHandler: @escaping (Bool, MCSession?) -> Void) {
+    func onDidReceiveInvitation(from peerId: MCPeerID, invitationHandler: @escaping (Bool, MCSession?) -> Void) {
+        receivedInvitationPeerId = peerId
         invitationResponseHandler = invitationHandler
         isPresentingInvitationFromPeerAlert.toggle()
     }
@@ -73,11 +78,9 @@ extension PeerBrowserView: MCServiceManagerDelegate {
 struct PeerBrowserView_Previews: PreviewProvider {
     static var previews: some View {
 		PeerBrowserView()
-            .environmentObject(User.getUser())
+            .environmentObject(User.sampleUser)
 			.environmentObject(
-                MCServiceManager(
-                    user: User.getUser()
-                )
+                MCServiceManager(user: User.sampleUser)
             )
     }
 }

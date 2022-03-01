@@ -9,7 +9,7 @@ import SwiftUI
 
 @main
 struct PeerToPeerTalkApp: App {
-	@StateObject var user = User.getUser()
+    @StateObject var user = DataManager.shared.getUser()
 	
     var body: some Scene {
         WindowGroup {

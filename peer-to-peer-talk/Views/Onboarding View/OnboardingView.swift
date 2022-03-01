@@ -121,6 +121,7 @@ struct OnboardingView: View {
         .onChange(of: user.hasCompletedOnboarding) { newValue in
             if newValue {
                 isPresented = !newValue
+                DataManager.shared.update(user: user)
             }
         }
     }
@@ -128,6 +129,6 @@ struct OnboardingView: View {
 
 struct OnboardingView_Previews: PreviewProvider {
     static var previews: some View {
-        OnboardingView(isPresented: .constant(true)).environmentObject(User.getUser())
+        OnboardingView(isPresented: .constant(true)).environmentObject(User.sampleUser)
     }
 }

@@ -33,7 +33,7 @@ struct TextBubbleView: View {
 struct TextBubbleView_Previews: PreviewProvider {
     static var previews: some View {
 		TextBubbleView(
-			user: User.getUser(),
+			user: User.sampleUser,
 			message: Message.getSampleMessage()
 		)
     }

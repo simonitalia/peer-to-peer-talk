@@ -10,7 +10,7 @@ import SwiftUI
 import UIKit
 
 protocol MCServiceManagerDelegate {
-    func onDidReceiveInvitation(from peer: MCPeerID, invitationHandler: @escaping (Bool, MCSession?) -> Void)
+    func onDidReceiveInvitation(from peerId: MCPeerID, invitationHandler: @escaping (Bool, MCSession?) -> Void)
 }
 
 class MCServiceManager: NSObject, ObservableObject {
@@ -28,7 +28,7 @@ class MCServiceManager: NSObject, ObservableObject {
     var delegate: MCServiceManagerDelegate?
     
     init(user: User) {
-		self.peerId = MCPeerID(displayName: user.name)
+        self.peerId = DataManager.shared.getPeerId(for: user)
 
         self.session = MCSession(
             peer: peerId,

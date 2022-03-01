@@ -98,7 +98,9 @@ struct ChatView: View {
 struct ChatView_Previews: PreviewProvider {
     static var previews: some View {
         ChatView()
-            .environmentObject(User.getUser())
-            .environmentObject(MCServiceManager(user: User.getUser()))
+            .environmentObject(User.sampleUser)
+            .environmentObject(MCServiceManager(
+                user: User.sampleUser)
+            )
     }
 }
