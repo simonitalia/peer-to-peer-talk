@@ -21,7 +21,7 @@ struct Message: Hashable, Identifiable, Codable {
 	static func getSampleMessage() -> Message {
 		return Message(
             text: "Sample Text",
-            user: User.getUser()
+            user: User.sampleUser
 		)
 	}
 }

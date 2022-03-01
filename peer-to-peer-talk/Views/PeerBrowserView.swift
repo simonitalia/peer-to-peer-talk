@@ -78,11 +78,9 @@ extension PeerBrowserView: MCServiceManagerDelegate {
 struct PeerBrowserView_Previews: PreviewProvider {
     static var previews: some View {
 		PeerBrowserView()
-            .environmentObject(User.getUser())
+            .environmentObject(User.sampleUser)
 			.environmentObject(
-                MCServiceManager(
-                    user: User.getUser()
-                )
+                MCServiceManager(user: User.sampleUser)
             )
     }
 }

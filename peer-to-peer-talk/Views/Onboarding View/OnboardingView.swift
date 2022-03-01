@@ -128,6 +128,6 @@ struct OnboardingView: View {
 
 struct OnboardingView_Previews: PreviewProvider {
     static var previews: some View {
-        OnboardingView(isPresented: .constant(true)).environmentObject(User.getUser())
+        OnboardingView(isPresented: .constant(true)).environmentObject(User.sampleUser)
     }
 }

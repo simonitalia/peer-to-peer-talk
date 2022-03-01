@@ -13,7 +13,7 @@ class User: Hashable, Equatable, ObservableObject, Codable {
     let name: String
     @Published var hasCompletedOnboarding: Bool
 	
-	private init() {
+	init() {
         self.id = UUID()
 		self.name = String().random()
         self.hasCompletedOnboarding = false
@@ -48,9 +48,6 @@ class User: Hashable, Equatable, ObservableObject, Codable {
 		try container.encodeIfPresent(self.hasCompletedOnboarding, forKey: .hasCompletedOnboarding)
 	}
     
-    // single shared user between app and previews
-    static private let sharedUser = User()
-    class func getUser() -> User {
-        return sharedUser
-    }
+    // sample user for previews
+    static let sampleUser = User()
 }
