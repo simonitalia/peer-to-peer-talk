@@ -30,7 +30,7 @@ struct DataManager {
                 return user
                 
             } catch let error {
-                fatalError("DataManager.getUser from data error: \(error)")
+                fatalError("DataManager.getUser error: \(error.localizedDescription)")
             }
         }
         
@@ -40,60 +40,41 @@ struct DataManager {
     
     private func createUser() -> User {
         
-        //create user
+        // create user
         let user = User()
         
-        // attempt to save user
-        save(user: user)  { result in
-            
-            // if user save succeeds, create peer id
-            switch result {
-            case .success:
-                savePeerId(for: user) { result in
-                    switch result {
-                    case .success:
-                        print("DataManager.save peerId success")
-                    
-                    case .failure(let error):
-                        fatalError("DataManager.save peerId error: \(error)")
-                    }
-                }
-            
-            case .failure(let error):
-                fatalError("DataManager.save user error: \(error)")
-            }
-        }
+        // save user and peerId
+        save(user: user)
+        savePeerId(for: user)
         
-        // return new user if peer id is created succesfully
+        // return user
         return user
     }
     
-    private func save(user: User, result: @escaping (Result<Bool, Error>) -> Void) {
+    private func save(user: User) {
          
          // save new user object as json data
          let encoder = JSONEncoder()
          do {
              let data = try encoder.encode(user)
              UserDefaults.standard.set(data, forKey: Key.user)
-             print("DataManager.saveUser success")
-             result(.success(true))
-         
-         } catch let error {
-            result(.failure(error))
+             print("DataManager.save user success")
+            
+         } catch {
+             print("DataManager.save user data error \(error.localizedDescription)")
          }
     }
     
-    private func savePeerId(for user: User, result: @escaping (Result<Bool, Error>) -> Void) {
+    private func savePeerId(for user: User) {
         let peerId = MCPeerID(displayName: user.name)
         
         do {
             let data = try NSKeyedArchiver.archivedData(withRootObject: peerId, requiringSecureCoding: false)
             UserDefaults.standard.set(data, forKey: Key.userPeerId)
-            print("DataManager.savePeerId success")
-            result(.success(true))
+            print("DataManager.save peerId success")
             
         } catch let error {
-            result(.failure(error))
+            print("DataManager.save peerId data error \(error.localizedDescription)")
         }
     }
     
@@ -108,7 +89,6 @@ struct DataManager {
         // transform to MCPeerID type and return if successful
         do {
             if let peerId = try NSKeyedUnarchiver.unarchiveTopLevelObjectWithData(data) as? MCPeerID {
-                
                 print("DataManager.getPeerId success")
                 return peerId
             }
@@ -117,6 +97,15 @@ struct DataManager {
             fatalError("DataManager.getPeerId error: \(error)")
         }
         
-        fatalError("DataManager.getPeerId for user error")
+        // fall through for any other errors
+        fatalError("DataManager.getPeerId unkown error")
+    }
+    
+    func update(user: User) {
+        save(user: user)
+    }
+    
+    func updatePeerId(for user: User) {
+        savePeerId(for: user)
     }
 }

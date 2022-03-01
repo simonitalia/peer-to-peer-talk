@@ -121,6 +121,7 @@ struct OnboardingView: View {
         .onChange(of: user.hasCompletedOnboarding) { newValue in
             if newValue {
                 isPresented = !newValue
+                DataManager.shared.update(user: user)
             }
         }
     }
