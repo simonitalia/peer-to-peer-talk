@@ -11,117 +11,116 @@ struct OnboardingView: View {
     @EnvironmentObject var user: User
     @Binding var isPresented: Bool
     
-    var languages = ["English", "Russian"]
-    @State private var selectedLanguage = "English"
-    @State private var isShowingOnboardingFirst = true
-    @AppStorage("languageIdentifier") private var languageIdentifier = "en"
+    private enum Language: String, CaseIterable {
+        case english = "English", russian = "Russian"
+        
+        enum Identifier: String {
+            case en, ru
+        }
+    }
     
+    private enum OnboardingStep: Int, CaseIterable {
+        case one = 1, two = 2, completed = 3
+    }
+            
+    @State private var selectedLanguage: Language = .english
+    @State private var onboardingStep = OnboardingStep.one
+    @AppStorage("languageIdentifier") private var languageIdentifier = Language.Identifier.en
     
     private var title: String {
-        return isShowingOnboardingFirst ? "Welcome to P2P Talk" : "Confirm Display Name"
+        switch onboardingStep {
+        case .one:
+            return "Welcome to P2P Talk"
+        case .two:
+            return "Display Name"
+        case .completed:
+            return ""
+        }
     }
     
     var body: some View {
-        
+
         NavigationView {
-            
             ZStack {
                 
-                // Select Language onboarding container
-                VStack(alignment: .center) {
-                    Text("Please, choose your language")
-                        .font(Font.system(.title3, design: .rounded).weight(.regular))
-                        .frame(width: 200, height: 100, alignment: .center)
-                        .multilineTextAlignment(.center)
-                        .offset(x: 0, y: -160)
-                    
-                    //                    //App settings button
-                    //                    Button(action: {
-                    //                        UIApplication.shared.open(
-                    //                            URL(
-                    //                                string: UIApplication.openSettingsURLString)!,
-                    //                            options: [:],
-                    //                            completionHandler: nil)
-                    //                    }
-                    //                    ) {
-                    //                        HStack{
-                    //                            Image(systemName: "gear")
-                    //                                .foregroundColor(Color.black)
-                    //                            Text("App Settings")
-                    //                                .foregroundColor(Color.black)
-                    //                        }
-                    //
-                    //                    }
-                    //                    .buttonStyle(BigPaddedButtonStyle2())
-                    //                    .offset(x: 0, y: -60)
-                    //                    .shadow(color: .black, radius: 3, x: 3, y: 3)
-                    
-                    Picker("Please choose your language", selection: $selectedLanguage) {
-                        ForEach(languages, id: \.self) {
-                            Text(LocalizedStringKey($0))
-                        }
-                    }
-                    .pickerStyle(.wheel)
-                    .offset(x: 0, y: -20)
-                    
-                    //continue button
-                    Button(action: {
-                        isShowingOnboardingFirst = false
-                        switch selectedLanguage {
-                        case "English":
-                            self.languageIdentifier = "en"
-                        case "Russian":
-                            self.languageIdentifier = "ru"
-                        default:
-                            print("Unknown value of the picker")
-                        }
-                    }) {
-                        Text("Continue")
-                    }
-                    .buttonStyle(BigPaddedButtonStyle())
-                }
-                .opacity(isShowingOnboardingFirst ? 1 : 0)
-                
-                //Display Name onboarding container
                 VStack {
-                    Text("This name is unchangable")
-                        .font(Font.system(.title3, design: .rounded).weight(.regular))
-                        .frame(width: 200, height: 100, alignment: .center)
-                        .multilineTextAlignment(.center)
-                        .offset(x: 0, y: -200)
                     
-                    Text(user.name)
-                        .foregroundColor(.white)
-                        .padding()
-                        .background(Color.gray)
-                        .offset(x: 0, y: -100)
+                    Spacer()
                     
-                    //continue button
-                    Button(action: {
-                        user.hasCompletedOnboarding.toggle()
-                    }) {
-                        Text("Continue")
+                    // Select Language onboarding container
+                    VStack(alignment: .center) {
+                        Text("Select language")
+                        
+                        Picker("Please choose your language", selection: $selectedLanguage) {
+                            ForEach(Language.allCases, id: \.self) {
+                                Text(LocalizedStringKey($0.rawValue))
+                            }
+                        }
+                        .pickerStyle(.wheel)
+                        .offset(x: 0, y: -20)
                     }
-                    .buttonStyle(BigPaddedButtonStyle())
+                    .zIndex(0)
+                    .opacity(onboardingStep == .one ? 1 : 0)
                     
-                    VStack {
-                        Text("Display name will be generated each time you open the app.")
+                    //Display Name onboarding container
+                    VStack(alignment: .center) {
+                        Text(user.name)
+                            .foregroundColor(.white)
                             .padding()
-                            .multilineTextAlignment(.center)
-                            .frame(width: 430, height: 130)
-                            .offset(x: 0, y: 40)
+                            .background(Color.gray)
+                        
+                        Text("You can change your display in settings")
+//                            .offset(x: 0, y: -100)
                     }
+                    .zIndex(1)
+                    .opacity(onboardingStep == .two ? 1 : 0)
+                    
+                    Spacer()
+                        
+                    //continue button
+                    Button(onboardingStep == .one ? "Continue" : "Complete") {
+                        setLanguage()
+                        nextOnboardingStep()
+                    }
+                    .background(Color(UIColor.systemBlue))
+                    .foregroundColor(Color(UIColor.white))
+                    .cornerRadius(CGFloat(5))
+                    .frame(maxWidth: .infinity, alignment: .center)
+                    
+                    Spacer()
                 }
-                .opacity(isShowingOnboardingFirst ? 0 : 1)
-                
+                .padding()
             }
             .navigationTitle(LocalizedStringKey(title))
         }
         
-        .onChange(of: user.hasCompletedOnboarding) { newValue in
-            if newValue {
-                isPresented = !newValue
+        .onChange(of: onboardingStep) { newValue in
+            if newValue == .completed {
+                user.hasCompletedOnboarding.toggle()
+                isPresented.toggle()
                 DataManager.shared.update(user: user)
+            }
+        }
+    }
+    
+    private func setLanguage() {
+        guard onboardingStep == .one else { return }
+        
+        switch selectedLanguage {
+        case .english:
+            self.languageIdentifier = .en
+            
+        case .russian:
+            self.languageIdentifier = .ru
+        }
+    }
+    
+    private func nextOnboardingStep() {
+        let nextStep = onboardingStep.rawValue + 1
+        OnboardingStep.allCases.forEach { step in
+            if step.rawValue == nextStep {
+                onboardingStep = step
+                return
             }
         }
     }
