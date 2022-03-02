@@ -39,61 +39,88 @@ struct OnboardingView: View {
     }
     
     var body: some View {
-
         NavigationView {
-            ZStack {
+
+            TabView {
                 
+                // MARK: Onboarding Screen: Welcome
                 VStack {
+                    Spacer()
+                    
+                    Text("A New Way to connect! \nAnonynmously and Securley")
+                        .font(.title2)
+                        .fontWeight(.bold)
+                        .padding()
                     
                     Spacer()
                     
-                    // Select Language onboarding container
-                    VStack(alignment: .center) {
-                        Text("Select language")
-                        
-                        Picker("Please choose your language", selection: $selectedLanguage) {
-                            ForEach(Language.allCases, id: \.self) {
-                                Text(LocalizedStringKey($0.rawValue))
-                            }
-                        }
-                        .pickerStyle(.wheel)
-                        .offset(x: 0, y: -20)
+                    ZStack {
+                        Image("MainTextBubble")
+                        Circle()
+                            .stroke()
+                            .foregroundColor(.gray)
+                            .opacity(0.1)
+                            .frame(width: 375, height: 375, alignment: .center)
+                        Circle()
+                            .stroke()
+                            .foregroundColor(.gray)
+                            .opacity(0.2)
+                            .frame(width: 300, height: 300, alignment: .center)
+                        Circle()
+                            .stroke()
+                            .foregroundColor(.gray)
+                            .opacity(0.3)
+                            .frame(width: 225, height: 225, alignment: .center)
                     }
-                    .zIndex(0)
-                    .opacity(onboardingStep == .one ? 1 : 0)
-                    
-                    //Display Name onboarding container
-                    VStack(alignment: .center) {
-                        Text(user.name)
-                            .foregroundColor(.white)
-                            .padding()
-                            .background(Color.gray)
-                        
-                        Text("You can change your display in settings")
-//                            .offset(x: 0, y: -100)
-                    }
-                    .zIndex(1)
-                    .opacity(onboardingStep == .two ? 1 : 0)
                     
                     Spacer()
-                        
-                    //continue button
-                    Button(onboardingStep == .one ? "Continue" : "Complete") {
-                        setLanguage()
-                        nextOnboardingStep()
-                    }
-                    .background(Color(UIColor.systemBlue))
-                    .foregroundColor(Color(UIColor.white))
-                    .cornerRadius(CGFloat(5))
-                    .frame(maxWidth: .infinity, alignment: .center)
                     
+                    HStack(alignment: .center) {
+                        Text("Get Started")
+                        Text(Image(systemName: "arrow.forward"))
+                    }
+                    .frame(minWidth: 0, maxWidth: 250, minHeight: 0, maxHeight: 50)
+                    .background(Color.indigo)
+                    .foregroundColor(.white)
+                    .cornerRadius(30)
+                   
                     Spacer()
                 }
                 .padding()
+            
+                // MARK: Onboarding Screen: Select Language
+                VStack {
+                    Text("Select your preferred language")
+
+                    Picker("Please choose your language", selection: $selectedLanguage) {
+                        ForEach(Language.allCases, id: \.self) {
+                            Text(LocalizedStringKey($0.rawValue))
+                        }
+                    }
+                    .pickerStyle(.wheel)
+                }
+                
+                // MARK: Onboarding Screen: Display Name
+                VStack {
+
+                    Text(user.name)
+                        .foregroundColor(.white)
+                        .padding()
+                        .background(Color.gray)
+
+                    Text("You can change your display in settings")
+                    
+             
+                }
             }
+            // Page Tab View modifiers
+            .tabViewStyle(.page)
+            .indexViewStyle(.page(backgroundDisplayMode: .always))
+            
+            // Navigation modifiers
             .navigationTitle(LocalizedStringKey(title))
+            .navigationBarTitleDisplayMode(.inline)
         }
-        
         .onChange(of: onboardingStep) { newValue in
             if newValue == .completed {
                 user.hasCompletedOnboarding.toggle()
