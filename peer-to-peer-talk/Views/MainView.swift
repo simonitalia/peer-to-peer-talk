@@ -22,24 +22,17 @@ struct MainView: View {
 			if user.hasCompletedOnboarding {
 		
 				TabView(selection: $selectedTabViewItem) {
-					
-                    PeerBrowserView()
-						.tabItem {
-							Label("People Nearby", systemImage: "network")
-						}
-						.tag(0)
-					
 					ChatView()
 						.tabItem {
 							Label("Chat", systemImage: "bubble.left.and.bubble.right.fill")
 						}
-						.tag(1)
+						.tag(0)
 					
                     SettingsView()
 						.tabItem {
 							Label("Settings", systemImage: "gear.circle.fill")
 						}
-						.tag(2)
+						.tag(1)
 				}
             
             } else {
@@ -63,5 +56,6 @@ struct MainView_Previews: PreviewProvider {
                 user: User.sampleUser
             )
         ).environmentObject(User.sampleUser)
+        
     }
 }
