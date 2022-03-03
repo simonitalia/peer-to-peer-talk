@@ -11,6 +11,9 @@ struct OnboardingView: View {
     @EnvironmentObject var user: User
     @Binding var isPresented: Bool
     
+    // Language properties
+    @AppStorage("languageIdentifier") private var languageIdentifier = Language.Identifier.en
+    @State private var selectedLanguage: Language = .english
     private enum Language: String, CaseIterable {
         case english = "English", russian = "Russian"
         
@@ -19,24 +22,7 @@ struct OnboardingView: View {
         }
     }
     
-    private enum OnboardingStep: Int, CaseIterable {
-        case one = 1, two = 2, completed = 3
-    }
-            
-    @State private var selectedLanguage: Language = .english
-    @State private var onboardingStep = OnboardingStep.one
-    @AppStorage("languageIdentifier") private var languageIdentifier = Language.Identifier.en
-    
-    private var title: String {
-        switch onboardingStep {
-        case .one:
-            return "Welcome to P2P Talk"
-        case .two:
-            return "Display Name"
-        case .completed:
-            return ""
-        }
-    }
+    @State private var isOnboardingCompleted = false
     
     var body: some View {
         NavigationView {
@@ -47,30 +33,14 @@ struct OnboardingView: View {
                 VStack {
                     Spacer()
                     
-                    Text("A New Way to connect! \nAnonynmously and Securley")
-                        .font(.title2)
+                    Text("Welcome to P2P Talk")
+                        .font(.title)
                         .fontWeight(.bold)
                         .padding()
                     
-                    Spacer()
-                    
                     ZStack {
                         Image("MainTextBubble")
-                        Circle()
-                            .stroke()
-                            .foregroundColor(.gray)
-                            .opacity(0.1)
-                            .frame(width: 375, height: 375, alignment: .center)
-                        Circle()
-                            .stroke()
-                            .foregroundColor(.gray)
-                            .opacity(0.2)
-                            .frame(width: 300, height: 300, alignment: .center)
-                        Circle()
-                            .stroke()
-                            .foregroundColor(.gray)
-                            .opacity(0.3)
-                            .frame(width: 225, height: 225, alignment: .center)
+                        StaticRadioWaveView()
                     }
                     
                     Spacer()
@@ -83,46 +53,91 @@ struct OnboardingView: View {
                     .background(Color.indigo)
                     .foregroundColor(.white)
                     .cornerRadius(30)
-                   
+                    
                     Spacer()
                 }
                 .padding()
+                .frame(maxHeight: .infinity, alignment: .bottom)
             
                 // MARK: Onboarding Screen: Select Language
                 VStack {
-                    Text("Select your preferred language")
-
-                    Picker("Please choose your language", selection: $selectedLanguage) {
-                        ForEach(Language.allCases, id: \.self) {
-                            Text(LocalizedStringKey($0.rawValue))
+                    Spacer()
+                    
+                    Text("Set preferred language")
+                        .font(.title2)
+                        .padding()
+                    
+                    ZStack {
+                        Picker("Please choose your language", selection: $selectedLanguage) {
+                            ForEach(Language.allCases, id: \.self) {
+                                Text(LocalizedStringKey($0.rawValue))
+                            }
                         }
+                        .pickerStyle(.wheel)
+                        
+                        StaticRadioWaveView()
                     }
-                    .pickerStyle(.wheel)
+                    
+                    Spacer()
+                    
+                    HStack(alignment: .center) {
+                        Text("Continue")
+                        Text(Image(systemName: "arrow.forward"))
+                    }
+                    .frame(minWidth: 0, maxWidth: 250, minHeight: 0, maxHeight: 50)
+                    .background(Color.indigo)
+                    .foregroundColor(.white)
+                    .cornerRadius(30)
+                    
+                    Spacer()
                 }
+                .padding()
+                .frame(maxHeight: .infinity, alignment: .bottom)
                 
                 // MARK: Onboarding Screen: Display Name
                 VStack {
-
-                    Text(user.name)
-                        .foregroundColor(.white)
+                    Spacer()
+                
+                    Text("Your private name shown to others")
+                        .font(.title2)
                         .padding()
-                        .background(Color.gray)
-
-                    Text("You can change your display in settings")
                     
-             
+                    ZStack {
+                        Text(user.name)
+                            .font(.largeTitle)
+                            .fontWeight(.bold)
+                        
+                        RadioWaveView()
+                    }
+                    
+                    Spacer()
+                    
+                    Button {
+                        isOnboardingCompleted.toggle()
+                    } label: {
+                        Text("Complete")
+                        Image(systemName: "checkmark")
+                    }
+                    .frame(minWidth: 0, maxWidth: 250, minHeight: 0, maxHeight: 50)
+                    .background(Color.indigo)
+                    .foregroundColor(.white)
+                    .cornerRadius(30)
+                    
+                    Spacer()
                 }
+                .padding()
+                .frame(maxHeight: .infinity, alignment: .bottom)
             }
             // Page Tab View modifiers
             .tabViewStyle(.page)
             .indexViewStyle(.page(backgroundDisplayMode: .always))
             
             // Navigation modifiers
-            .navigationTitle(LocalizedStringKey(title))
+            .navigationTitle(LocalizedStringKey("P2P Talk"))
             .navigationBarTitleDisplayMode(.inline)
         }
-        .onChange(of: onboardingStep) { newValue in
-            if newValue == .completed {
+        .onChange(of: isOnboardingCompleted) { newValue in
+            if newValue {
                 user.hasCompletedOnboarding.toggle()
                 isPresented.toggle()
                 DataManager.shared.update(user: user)
@@ -131,24 +146,12 @@ struct OnboardingView: View {
     }
     
     private func setLanguage() {
-        guard onboardingStep == .one else { return }
-        
         switch selectedLanguage {
         case .english:
             self.languageIdentifier = .en
             
         case .russian:
             self.languageIdentifier = .ru
-        }
-    }
-    
-    private func nextOnboardingStep() {
-        let nextStep = onboardingStep.rawValue + 1
-        OnboardingStep.allCases.forEach { step in
-            if step.rawValue == nextStep {
-                onboardingStep = step
-                return
-            }
         }
     }
 }
