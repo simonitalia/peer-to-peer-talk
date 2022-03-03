@@ -10,20 +10,19 @@ import SwiftUI
 struct ChatView: View {
     @EnvironmentObject var user: User
     @EnvironmentObject var mcServiceManager: MCServiceManager
-    
-    
+    @State private var isPresententingPeerBrowserView: Bool = true
     @State private var chatThread = [Message]()
     @State private var typedText = ""
     
-    
+    private var buttonTitle: String {
+        return mcServiceManager.connectedPeers.isEmpty ? "Start new chat" : "End chat"
+    }
     
     var body: some View {
-        
         NavigationView {
             ScrollViewReader { proxy in
                 VStack {
                     List {
-                        
                         ForEach(chatThread) { message in
                             TextBubbleView(user: user, message: message)
                                 .id(message)
@@ -38,8 +37,6 @@ struct ChatView: View {
                         .listRowSeparator(.hidden)
                         .listRowInsets(.init(top: 0, leading: 0, bottom: 0, trailing: 0))
                         .listRowBackground(Color.white)
-                        
-                        
                     }
                     
                     Spacer()
@@ -72,13 +69,25 @@ struct ChatView: View {
                     }
                 }
             }
+            .toolbar {
+                Button(buttonTitle) {
+                    isPresententingPeerBrowserView.toggle()
+                    
+                    if !mcServiceManager.connectedPeers.isEmpty {
+                        chatThread.removeAll()
+                    }
+                }
+            }
+        }
+        
+        .sheet(isPresented: $isPresententingPeerBrowserView) {
+            PeerBrowserView(isPresententingMCBrowserViewController: $isPresententingPeerBrowserView).interactiveDismissDisabled()
         }
     }
     
     
     func sendMessage() {
         guard !typedText.isEmpty else { return }
-        
         
         let newMessage = Message(
             text: typedText,
@@ -92,8 +101,8 @@ struct ChatView: View {
         //reset text field
         self.typedText.removeAll()
     }
-    
 }
+
 
 struct ChatView_Previews: PreviewProvider {
     static var previews: some View {

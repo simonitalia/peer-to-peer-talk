@@ -24,6 +24,7 @@ class MCServiceManager: NSObject, ObservableObject {
 	let peerId: MCPeerID
     private let advertiser: MCNearbyServiceAdvertiser
     let session: MCSession
+    @Published var connectedPeers = [MCPeerID]()
     
     var delegate: MCServiceManagerDelegate?
     
@@ -90,6 +91,10 @@ extension MCServiceManager: MCNearbyServiceAdvertiserDelegate {
 extension MCServiceManager: MCSessionDelegate {
     func session(_ session: MCSession, peer peerID: MCPeerID, didChange state: MCSessionState) {
         print("MCServiceManager.session peer \(peerID.displayName) didChangeState: \(state.rawValue)\npeers in session \(session.connectedPeers.count)")
+        
+        DispatchQueue.main.async { [unowned self] in
+            self.connectedPeers = session.connectedPeers
+        }
         
         switch state {
             case .connected:
