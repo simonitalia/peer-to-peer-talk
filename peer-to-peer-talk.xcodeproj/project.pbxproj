@@ -7,11 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		1C5E0B1227BBA53A00B0C5A7 /* OnboardingSecond.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C5E0B1127BBA53A00B0C5A7 /* OnboardingSecond.swift */; };
 		1C92970627BE8A69002AAF11 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 1C92970827BE8A69002AAF11 /* Localizable.strings */; };
-		1C9A3A1027BB9DD100C146E8 /* OnboardingFirst.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C9A3A0F27BB9DD100C146E8 /* OnboardingFirst.swift */; };
 		2A12C1A627C27912009DE6D1 /* ButtonStyle+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A12C1A527C27912009DE6D1 /* ButtonStyle+Extensions.swift */; };
 		2A84077627CEB7400074031D /* DataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A84077527CEB7400074031D /* DataManager.swift */; };
+		2A84077827D02B240074031D /* RadioWaveView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A84077727D02B240074031D /* RadioWaveView.swift */; };
 		2A9D3DDB27C1EC5900712DD7 /* OnboardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A9D3DDA27C1EC5900712DD7 /* OnboardingView.swift */; };
 		2A9F4B4327C1748D008F040E /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A9F4B4227C1748D008F040E /* MainView.swift */; };
 		2A9F4B4527C174BA008F040E /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A9F4B4427C174BA008F040E /* SettingsView.swift */; };
@@ -29,12 +28,11 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		1C5E0B1127BBA53A00B0C5A7 /* OnboardingSecond.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingSecond.swift; sourceTree = "<group>"; };
 		1C92970727BE8A69002AAF11 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		1C92970927BE8A90002AAF11 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/Localizable.strings; sourceTree = "<group>"; };
-		1C9A3A0F27BB9DD100C146E8 /* OnboardingFirst.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingFirst.swift; sourceTree = "<group>"; };
 		2A12C1A527C27912009DE6D1 /* ButtonStyle+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ButtonStyle+Extensions.swift"; sourceTree = "<group>"; };
 		2A84077527CEB7400074031D /* DataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataManager.swift; sourceTree = "<group>"; };
+		2A84077727D02B240074031D /* RadioWaveView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RadioWaveView.swift; sourceTree = "<group>"; };
 		2A9D3DDA27C1EC5900712DD7 /* OnboardingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingView.swift; sourceTree = "<group>"; };
 		2A9F4B4227C1748D008F040E /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
 		2A9F4B4427C174BA008F040E /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
@@ -85,8 +83,7 @@
 			isa = PBXGroup;
 			children = (
 				2A9D3DDA27C1EC5900712DD7 /* OnboardingView.swift */,
-				1C9A3A0F27BB9DD100C146E8 /* OnboardingFirst.swift */,
-				1C5E0B1127BBA53A00B0C5A7 /* OnboardingSecond.swift */,
+				2A84077727D02B240074031D /* RadioWaveView.swift */,
 			);
 			path = "Onboarding View";
 			sourceTree = "<group>";
@@ -236,6 +233,7 @@
 				2AEA957627B4178A009C7645 /* MCServiceManager.swift in Sources */,
 				2A84077627CEB7400074031D /* DataManager.swift in Sources */,
 				2A9F4B4327C1748D008F040E /* MainView.swift in Sources */,
+				2A84077827D02B240074031D /* RadioWaveView.swift in Sources */,
 				2AF0459A27B2B09D0002FB71 /* ChatView.swift in Sources */,
 				2A9D3DDB27C1EC5900712DD7 /* OnboardingView.swift in Sources */,
 				EEB41EB527BBE6DD00BE76BD /* TextBubbleView.swift in Sources */,
@@ -245,8 +243,6 @@
 				EEB41EEF27BE694800BE76BD /* ChatHelper.swift in Sources */,
 				2A9F4B4727C174F9008F040E /* PeerBrowserView.swift in Sources */,
 				EEB41EF327BE6AA200BE76BD /* User.swift in Sources */,
-				1C5E0B1227BBA53A00B0C5A7 /* OnboardingSecond.swift in Sources */,
-				1C9A3A1027BB9DD100C146E8 /* OnboardingFirst.swift in Sources */,
 				2A9F4B4527C174BA008F040E /* SettingsView.swift in Sources */,
 				2A12C1A627C27912009DE6D1 /* ButtonStyle+Extensions.swift in Sources */,
 			);
