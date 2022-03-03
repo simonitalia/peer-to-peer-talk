@@ -136,6 +136,9 @@ struct OnboardingView: View {
             .navigationTitle(LocalizedStringKey("P2P Talk"))
             .navigationBarTitleDisplayMode(.inline)
         }
+        .onChange(of: selectedLanguage) { language in
+            setLanguage(to: language)
+        }
         .onChange(of: isOnboardingCompleted) { newValue in
             if newValue {
                 user.hasCompletedOnboarding.toggle()
@@ -143,13 +146,15 @@ struct OnboardingView: View {
                 DataManager.shared.update(user: user)
             }
         }
+        .environment(\.locale, .init(identifier: self.languageIdentifier.rawValue))
     }
     
-    private func setLanguage() {
-        switch selectedLanguage {
+    private func setLanguage(to language: Language) {
+        
+        switch language {
         case .english:
             self.languageIdentifier = .en
-            
+
         case .russian:
             self.languageIdentifier = .ru
         }
