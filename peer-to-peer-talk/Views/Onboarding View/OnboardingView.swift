@@ -12,22 +12,15 @@ struct OnboardingView: View {
     @Binding var isPresented: Bool
     
     // Language properties
-    @AppStorage("languageIdentifier") private var languageIdentifier = Language.Identifier.en
-    @State private var selectedLanguage: Language = .english
-    private enum Language: String, CaseIterable {
-        case english = "English", russian = "Russian"
-        
-        enum Identifier: String {
-            case en, ru
-        }
-    }
-    
+    @AppStorage("languageIdentifier") private var languageIdentifier = MainView.Language.Identifier.en
+    @State private var selectedLanguage: MainView.Language = .english
     @State private var isOnboardingCompleted = false
+    @State private var pageIndex = 0
     
     var body: some View {
         NavigationView {
 
-            TabView {
+            TabView(selection: $pageIndex) {
                 
                 // MARK: Onboarding Screen: Welcome
                 VStack {
@@ -45,9 +38,11 @@ struct OnboardingView: View {
                     
                     Spacer()
                     
-                    HStack(alignment: .center) {
+                    Button {
+                        pageIndex = 1
+                    } label: {
                         Text("Get Started")
-                        Text(Image(systemName: "arrow.forward"))
+                        Image(systemName: "arrow.forward")
                     }
                     .frame(minWidth: 0, maxWidth: 250, minHeight: 0, maxHeight: 50)
                     .background(Color.indigo)
@@ -56,6 +51,7 @@ struct OnboardingView: View {
                     
                     Spacer()
                 }
+                .tag(0)
                 .padding()
                 .frame(maxHeight: .infinity, alignment: .bottom)
             
@@ -69,7 +65,7 @@ struct OnboardingView: View {
                     
                     ZStack {
                         Picker("Please choose your language", selection: $selectedLanguage) {
-                            ForEach(Language.allCases, id: \.self) {
+                            ForEach(MainView.Language.allCases, id: \.self) {
                                 Text(LocalizedStringKey($0.rawValue))
                             }
                         }
@@ -80,9 +76,11 @@ struct OnboardingView: View {
                     
                     Spacer()
                     
-                    HStack(alignment: .center) {
+                    Button {
+                        pageIndex = 2
+                    } label: {
                         Text("Continue")
-                        Text(Image(systemName: "arrow.forward"))
+                        Image(systemName: "arrow.forward")
                     }
                     .frame(minWidth: 0, maxWidth: 250, minHeight: 0, maxHeight: 50)
                     .background(Color.indigo)
@@ -91,6 +89,7 @@ struct OnboardingView: View {
                     
                     Spacer()
                 }
+                .tag(1)
                 .padding()
                 .frame(maxHeight: .infinity, alignment: .bottom)
                 
@@ -125,6 +124,7 @@ struct OnboardingView: View {
                     
                     Spacer()
                 }
+                .tag(2)
                 .padding()
                 .frame(maxHeight: .infinity, alignment: .bottom)
             }
@@ -148,7 +148,7 @@ struct OnboardingView: View {
         }
     }
     
-    private func setLanguage(to language: Language) {
+    private func setLanguage(to language: MainView.Language) {
         
         switch language {
         case .english:

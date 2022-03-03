@@ -8,7 +8,16 @@
 import SwiftUI
 
 struct MainView: View {
-    @AppStorage("languageIdentifier") private var languageIdentifier = "en"
+    
+    enum Language: String, CaseIterable {
+        case english = "English", russian = "Russian"
+        
+        enum Identifier: String {
+            case en, ru
+        }
+    }
+    
+    @AppStorage("languageIdentifier") private var languageIdentifier = MainView.Language.Identifier.en
 	@EnvironmentObject var user: User
 	@StateObject var mcServiceManager: MCServiceManager
     
@@ -42,7 +51,7 @@ struct MainView: View {
 			presentOnboardingView = !user.hasCompletedOnboarding
 		}
         .environmentObject(mcServiceManager)
-        .environment(\.locale, .init(identifier: self.languageIdentifier))
+        .environment(\.locale, .init(identifier: self.languageIdentifier.rawValue))
     }
 }
 
@@ -53,6 +62,5 @@ struct MainView_Previews: PreviewProvider {
                 user: User.sampleUser
             )
         ).environmentObject(User.sampleUser)
-        
     }
 }
