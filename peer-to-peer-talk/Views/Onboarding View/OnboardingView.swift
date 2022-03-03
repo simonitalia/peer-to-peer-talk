@@ -146,7 +146,6 @@ struct OnboardingView: View {
                 DataManager.shared.update(user: user)
             }
         }
-        .environment(\.locale, .init(identifier: self.languageIdentifier.rawValue))
     }
     
     private func setLanguage(to language: Language) {

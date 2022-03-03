@@ -8,11 +8,10 @@
 import SwiftUI
 
 struct MainView: View {
+    @AppStorage("languageIdentifier") private var languageIdentifier = "en"
 	@EnvironmentObject var user: User
 	@StateObject var mcServiceManager: MCServiceManager
-    @AppStorage("languageIdentifier") private var languageIdentifier = "en"
-
-	
+    
 	@State private var selectedTabViewItem = 0
 	@State private var presentOnboardingView: Bool = false
 
@@ -39,8 +38,6 @@ struct MainView: View {
                 OnboardingView(isPresented: $presentOnboardingView)
             }
 		}
-        
-        
 		.onAppear {
 			presentOnboardingView = !user.hasCompletedOnboarding
 		}
