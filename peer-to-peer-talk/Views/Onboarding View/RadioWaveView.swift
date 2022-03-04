@@ -10,23 +10,29 @@ import SwiftUI
 struct RadioWaveView: View {
     
     @State private var animationAmount = 1.0
+    @State private var scaleAmount = 1.0
+    
     var body: some View {
         ZStack {
-            Circle()
-                .stroke(.gray)
-                .scaleEffect(animationAmount)
+            makeCircleView()
+                .stroke(.indigo)
+                .scaleEffect(scaleAmount)
                 .opacity(2 - animationAmount)
                 .animation(
-                    .easeInOut(duration: 1)
+                    .easeInOut(duration: 1.25)
                         .repeatForever(autoreverses: false),
                     value: animationAmount
                 )
-                .frame(width: 375, height: 375, alignment: .center)
+                .frame(width: 50, height: 50, alignment: .center)
         }
-        
         .onAppear {
             animationAmount = 2
+            scaleAmount = 20
         }
+    }
+    
+    func makeCircleView() -> Circle {
+        return Circle()
     }
 }
 
@@ -43,17 +49,17 @@ struct StaticRadioWaveView: View {
         ZStack {
             Circle()
                 .stroke()
-                .foregroundColor(.gray)
+                .foregroundColor(.indigo)
                 .opacity(0.1)
                 .frame(width: 375, height: 375, alignment: .center)
             Circle()
                 .stroke()
-                .foregroundColor(.gray)
+                .foregroundColor(.indigo)
                 .opacity(0.2)
                 .frame(width: 300, height: 300, alignment: .center)
             Circle()
                 .stroke()
-                .foregroundColor(.gray)
+                .foregroundColor(.indigo)
                 .opacity(0.3)
                 .frame(width: 225, height: 225, alignment: .center)
         }

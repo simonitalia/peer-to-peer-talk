@@ -101,6 +101,8 @@ struct OnboardingView: View {
                         .font(.title2)
                         .padding()
                     
+                    Spacer(minLength: 165)
+                    
                     ZStack {
                         Text(user.name)
                             .font(.largeTitle)
@@ -109,7 +111,7 @@ struct OnboardingView: View {
                         RadioWaveView()
                     }
                     
-                    Spacer()
+                    Spacer(minLength: 250)
                     
                     Button {
                         isOnboardingCompleted.toggle()
