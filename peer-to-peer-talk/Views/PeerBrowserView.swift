@@ -27,6 +27,9 @@ struct PeerBrowserView: View {
         
         .onAppear {
             mcServiceManager.delegate = self
+            
+            // set color of invitation alert button to app theme
+            UIView.appearance(whenContainedInInstancesOf: [UIAlertController.self]).tintColor = .systemIndigo
         }
         
         // present invitation to connect alert
