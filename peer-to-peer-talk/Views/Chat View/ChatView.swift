@@ -14,9 +14,11 @@ struct ChatView: View {
     @State private var chatThread = [Message]()
     @State private var typedText = ""
     
-    private var buttonTitle: String {
-        return mcServiceManager.connectedPeers.isEmpty ? "Start new chat" : "End chat"
+    private var buttonImageTitle: String {
+        return mcServiceManager.connectedPeers.isEmpty ? "plus.message.fill" : "rectangle.portrait.and.arrow.right.fill"
     }
+    
+    
     
     var body: some View {
         NavigationView {
@@ -34,19 +36,20 @@ struct ChatView: View {
                                     }
                                 }
                         }
+                        .listRowBackground(Color.clear)
                         .listRowSeparator(.hidden)
                         .listRowInsets(.init(top: 0, leading: 0, bottom: 0, trailing: 0))
-                        .listRowBackground(Color.white)
                     }
                     
                     Spacer()
                     
-                    HStack {
+                    HStack(spacing: 7) {
                         TextField("Type something", text: $typedText)
-                            .font(.system(size: 15, weight: .regular))
-                            .padding(.all, 15)
-                            .textFieldStyle(.roundedBorder)
+                            .font(.system(size: 20, weight: .regular))
+                            .padding(.all, 10)
                             .ignoresSafeArea(.keyboard, edges: .bottom)
+                            .overlay(RoundedRectangle(cornerRadius: 10.0).strokeBorder(Color.indigo, style: StrokeStyle(lineWidth: 1.0)))
+                        
                             .onSubmit {
                                 self.sendMessage()
                             }
@@ -54,13 +57,14 @@ struct ChatView: View {
                         Button {
                             self.sendMessage()
                         } label: {
-                            Image(systemName: "arrow.up.circle")
-                                .font(.system(size: 25, weight: .regular))
-                                .foregroundColor(Color.primary)
+                            Image(systemName: "paperplane.circle.fill")
+                                .font(.system(size: 40, weight: .bold))
+                                .foregroundColor(Color.indigo)
                         }
                     }
                     .padding(.all, 15)
                 }
+                
                 
                 // update local data source with received message
                 .onChange(of: mcServiceManager.receivedMessages) { _ in
@@ -70,12 +74,15 @@ struct ChatView: View {
                 }
             }
             .toolbar {
-                Button(buttonTitle) {
+                Button {
                     isPresententingPeerBrowserView.toggle()
-                    
                     if !mcServiceManager.connectedPeers.isEmpty {
                         chatThread.removeAll()
                     }
+                } label: {
+                    Label("New chat", systemImage: buttonImageTitle)
+                        
+                        .font(.title2)
                 }
             }
         }
