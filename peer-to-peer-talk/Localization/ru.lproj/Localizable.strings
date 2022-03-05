@@ -73,8 +73,14 @@
 
 "Local Network Access" = "Доступ к локальной сети";
 
-"P2P Talk requires Local Network access to function." = "Для работы P2P Talk требуется доступ к локальной сети.";
+"Some features of P2P Talk use your device's preferred language. To also modify this setting, go to Settings > P2P Talk > Language." = "Некоторые функции P2P Talk используют предпочтительный язык вашего устройства. Чтобы также изменить этот параметр, перейдите в Настройки» > P2P Talk > Язык.";
 
+"P2P Talk requires Local Network access to function. Please ensure Local Network is enabled." = "Для работы P2P Talk требуется доступ к локальной сети. Убедитесь, что локальная сеть включена.";
 
+"Decline" = "Отклонить";
+
+"New Invitation" = "Новое приглашение";
+
+"would like to connect" = "хотел бы подключить";
 
 

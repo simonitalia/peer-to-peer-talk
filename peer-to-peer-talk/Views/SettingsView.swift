@@ -6,9 +6,10 @@
 //
 
 import SwiftUI
+import Network
 
 struct SettingsView: View {
-@EnvironmentObject var user: User
+    @EnvironmentObject var user: User
     
     @State var isPresentingPrivacyPolicy = false
     @State var isPresentingChooseLanguageView = false
@@ -21,35 +22,52 @@ struct SettingsView: View {
                     Label(user.name, systemImage: "person")
                 }
                 
-                Section(LocalizedStringKey("Language")) {
-                    Label(user.language, systemImage: "globe.europe.africa")
-                        .onTapGesture {
-                            isPresentingChooseLanguageView.toggle()
-                        }
+                Section(
+                    header: Text(LocalizedStringKey("Language")),
+                    footer: Text(LocalizedStringKey("Some features of P2P Talk use your device's preferred language. To also modify this setting, go to Settings > P2P Talk > Language."))
+                ) {
+                    
+                    HStack {
+                        Label(user.language, systemImage: "globe.europe.africa")
+                            .onTapGesture {
+                                isPresentingChooseLanguageView.toggle()
+                            }
+                        Spacer()
+                        Image(systemName: "chevron.forward")
+                            .foregroundColor(.indigo)
+                    }
                 }
                 
                 Section(
                     header: Text(LocalizedStringKey("Privacy")),
-                    footer: Text(LocalizedStringKey("P2P Talk requires Local Network access to function."))
+                    footer: Text(LocalizedStringKey("P2P Talk requires Local Network access to function. Please ensure Local Network is enabled."))
                 ) {
-                    Label(LocalizedStringKey("Privacy Policy"), systemImage: "hand.raised")
-                        .onTapGesture {
-                            isPresentingPrivacyPolicy.toggle()
-                        }
+                    HStack {
+                        Label(LocalizedStringKey("Privacy Policy"), systemImage: "hand.raised")
+                            .onTapGesture {
+                                isPresentingPrivacyPolicy.toggle()
+                            }
+                        Spacer()
+                        Image(systemName: "chevron.forward")
+                                .foregroundColor(.indigo)
+                    }
                     
-                    Label(LocalizedStringKey("Local Network Access"), systemImage: "network")
-                        .onTapGesture {
-                            
-                        }
+                    HStack {
+                        Label(LocalizedStringKey("Local Network Access"), systemImage: "network")
+                            .onTapGesture {
+                                Utils.openSettingsUrl(path: .localNetwork)
+                            }
+                        Spacer()
+                        Image(systemName: "chevron.forward")
+                                .foregroundColor(.indigo)
+                    }
                 }
-                
             }
             .menuIndicator(.automatic)
             .navigationTitle(LocalizedStringKey("Settings"))
             .navigationBarTitleDisplayMode(.inline)
         }
-        .environment(\.locale, .init(identifier: user.language))
-        
+
         // show privacy policy
         .sheet(isPresented: $isPresentingPrivacyPolicy) {
             PrivacyPolicyView(
@@ -62,6 +80,7 @@ struct SettingsView: View {
         .sheet(isPresented: $isPresentingChooseLanguageView) {
             ChooseLanguageView(showDoneButton: true)
         }
+        .environment(\.locale, .init(identifier: user.language))
     }
 }
 
