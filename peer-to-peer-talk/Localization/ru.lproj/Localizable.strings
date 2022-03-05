@@ -55,8 +55,26 @@
 
 "Anonymous display name" = "Анонимное отображаемое имя";
 
+"Display name" = "Показать имя";
+
 "Complete" = "Полный";
 
 "Accept" = "Принимать";
 
+"Close" = "Закрывать";
+
 "Type something" = "Введите что-либо";
+
+"Privacy" = "Конфиденциальность";
+
+"Privacy Policy" = "Политика конфиденциальности";
+
+"Language" = "Язык";
+
+"Local Network Access" = "Доступ к локальной сети";
+
+"P2P Talk requires Local Network access to function." = "Для работы P2P Talk требуется доступ к локальной сети.";
+
+
+
+

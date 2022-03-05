@@ -10,6 +10,12 @@ import SwiftUI
 struct PrivacyPolicyView: View {
     @EnvironmentObject var user: User
     @Binding var isPresented: Bool
+    let toolbarButtonType: ToolbarButtonType
+    
+    enum ToolbarButtonType: String {
+        case accept = "Accept",
+             close = "Close"
+    }
     
     var body: some View {
         NavigationView {
@@ -49,8 +55,16 @@ struct PrivacyPolicyView: View {
             .padding()
             .navigationTitle("Privacy Policy")
             .toolbar {
-                Button("Accept") {
-                    user.hasAcceptedPrivacyPolicy.toggle()
+                switch toolbarButtonType {
+                case.accept:
+                    Button(LocalizedStringKey(ToolbarButtonType.accept.rawValue)) {
+                        user.hasAcceptedPrivacyPolicy.toggle()
+                    }
+
+                case .close:
+                    Button(LocalizedStringKey(ToolbarButtonType.close.rawValue)) {
+                        isPresented.toggle()
+                    }
                 }
             }
             .onChange(of: user.hasAcceptedPrivacyPolicy) { newValue in
@@ -65,7 +79,9 @@ struct PrivacyPolicyView: View {
 
 struct PrivacyPolicyView_Previews: PreviewProvider {
     static var previews: some View {
-        PrivacyPolicyView(isPresented: .constant(true))
-            .environmentObject(User.sampleUser)
+        PrivacyPolicyView(
+            isPresented: .constant(true),
+            toolbarButtonType: .accept
+        ).environmentObject(User.sampleUser)
     }
 }

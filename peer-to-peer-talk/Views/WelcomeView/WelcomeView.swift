@@ -59,7 +59,10 @@ struct WelcomeView: View {
             .frame(maxHeight: .infinity, alignment: .bottom)
         }
         .sheet(isPresented: $isPresentingPrivacyPolicy) {
-            PrivacyPolicyView(isPresented: $isPresentingPrivacyPolicy)
+            PrivacyPolicyView(
+                isPresented: $isPresentingPrivacyPolicy,
+                toolbarButtonType: PrivacyPolicyView.ToolbarButtonType.accept
+            )
         }
     }
 }

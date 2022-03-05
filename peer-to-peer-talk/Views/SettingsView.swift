@@ -8,59 +8,66 @@
 import SwiftUI
 
 struct SettingsView: View {
-    var languages = ["English", "Russian"]
-    @State private var selectedLanguage = "English"
-    @AppStorage("languageIdentifier") private var languageIdentifier = "en"
+@EnvironmentObject var user: User
+    
+    @State var isPresentingPrivacyPolicy = false
+    @State var isPresentingChooseLanguageView = false
     
     var body: some View {
-		
         NavigationView {
-        
-            List {
-                Section("Display Name") {
-                    Text("Change Display Name")
-                    
-                }
             
-                Section("Privacy") {
-                    Text("Review Privacy Policy")
-                    Text("Accept Local Area Network")
-                    
-                    
-                    
+            List {
+                Section(LocalizedStringKey("Display name")) {
+                    Label(user.name, systemImage: "person")
                 }
                 
+                Section(LocalizedStringKey("Language")) {
+                    Label(user.language, systemImage: "globe.europe.africa")
+                        .onTapGesture {
+                            isPresentingChooseLanguageView.toggle()
+                        }
+                }
                 
+                Section(
+                    header: Text(LocalizedStringKey("Privacy")),
+                    footer: Text(LocalizedStringKey("P2P Talk requires Local Network access to function."))
+                ) {
+                    Label(LocalizedStringKey("Privacy Policy"), systemImage: "hand.raised")
+                        .onTapGesture {
+                            isPresentingPrivacyPolicy.toggle()
+                        }
+                    
+                    Label(LocalizedStringKey("Local Network Access"), systemImage: "network")
+                        .onTapGesture {
+                            
+                        }
+                }
                 
             }
-            .navigationTitle("Settings")
+            .menuIndicator(.automatic)
+            .navigationTitle(LocalizedStringKey("Settings"))
             .navigationBarTitleDisplayMode(.inline)
-            
-            
-//            VStack {
-//                Picker("Please choose the language", selection: $selectedLanguage) {
-//                    ForEach(languages, id: \.self) {
-//                        Text(LocalizedStringKey($0))
-//                    }
-//                }
-//                Button {
-//                    if selectedLanguage == "English" {
-//                        self.languageIdentifier = "en"
-//
-//                    } else {
-//                        self.languageIdentifier = "ru"
-//                    }
-//
-//                } label: {
-//                    Text("Select")
-//                }
-//            }
-		}
+        }
+        .environment(\.locale, .init(identifier: user.language))
+        
+        // show privacy policy
+        .sheet(isPresented: $isPresentingPrivacyPolicy) {
+            PrivacyPolicyView(
+                isPresented: $isPresentingPrivacyPolicy,
+                toolbarButtonType: PrivacyPolicyView.ToolbarButtonType.close
+            )
+        }
+        
+        // show choose language View
+        .sheet(isPresented: $isPresentingChooseLanguageView) {
+            ChooseLanguageView(showDoneButton: true)
+        }
     }
 }
 
 struct SettingsView_Previews: PreviewProvider {
     static var previews: some View {
         SettingsView()
+            .environmentObject(User.sampleUser)
     }
 }

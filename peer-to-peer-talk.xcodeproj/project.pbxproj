@@ -13,6 +13,7 @@
 		2A84077827D02B240074031D /* RadioWaveView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A84077727D02B240074031D /* RadioWaveView.swift */; };
 		2A84077A27D28C6C0074031D /* PrivacyPolicyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A84077927D28C6C0074031D /* PrivacyPolicyView.swift */; };
 		2A84077D27D2AB670074031D /* WelcomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A84077C27D2AB670074031D /* WelcomeView.swift */; };
+		2A84077F27D3938C0074031D /* ChooseLanguageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A84077E27D3938C0074031D /* ChooseLanguageView.swift */; };
 		2A9D3DDB27C1EC5900712DD7 /* OnboardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A9D3DDA27C1EC5900712DD7 /* OnboardingView.swift */; };
 		2A9F4B4327C1748D008F040E /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A9F4B4227C1748D008F040E /* MainView.swift */; };
 		2A9F4B4527C174BA008F040E /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A9F4B4427C174BA008F040E /* SettingsView.swift */; };
@@ -37,6 +38,7 @@
 		2A84077727D02B240074031D /* RadioWaveView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RadioWaveView.swift; sourceTree = "<group>"; };
 		2A84077927D28C6C0074031D /* PrivacyPolicyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrivacyPolicyView.swift; sourceTree = "<group>"; };
 		2A84077C27D2AB670074031D /* WelcomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeView.swift; sourceTree = "<group>"; };
+		2A84077E27D3938C0074031D /* ChooseLanguageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChooseLanguageView.swift; sourceTree = "<group>"; };
 		2A9D3DDA27C1EC5900712DD7 /* OnboardingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingView.swift; sourceTree = "<group>"; };
 		2A9F4B4227C1748D008F040E /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
 		2A9F4B4427C174BA008F040E /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
@@ -89,6 +91,7 @@
 			children = (
 				2A9D3DDA27C1EC5900712DD7 /* OnboardingView.swift */,
 				2A84077727D02B240074031D /* RadioWaveView.swift */,
+				2A84077E27D3938C0074031D /* ChooseLanguageView.swift */,
 			);
 			path = "Onboarding View";
 			sourceTree = "<group>";
@@ -251,6 +254,7 @@
 				2A84077827D02B240074031D /* RadioWaveView.swift in Sources */,
 				2A84077D27D2AB670074031D /* WelcomeView.swift in Sources */,
 				2AF0459A27B2B09D0002FB71 /* ChatView.swift in Sources */,
+				2A84077F27D3938C0074031D /* ChooseLanguageView.swift in Sources */,
 				2A9D3DDB27C1EC5900712DD7 /* OnboardingView.swift in Sources */,
 				EEB41EB527BBE6DD00BE76BD /* TextBubbleView.swift in Sources */,
 				EEB41EB927BC00D600BE76BD /* String+Extensions.swift in Sources */,

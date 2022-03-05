@@ -10,7 +10,6 @@ import SwiftUI
 struct OnboardingView: View {
     @EnvironmentObject var user: User
     
-    @State private var selectedLanguage = User.Language.english
     @State private var pageIndex = 0
     @State private var isOnboardingCompleted = false
     
@@ -22,25 +21,8 @@ struct OnboardingView: View {
                 
                 VStack {
                     Spacer()
-                    
-                    Text(LocalizedStringKey("Set language"))
-                        .font(.title2)
-                        .padding()
-                    
-                    ZStack {
-                        Picker(LocalizedStringKey("Please choose your language"), selection: $selectedLanguage) {
-                            ForEach(User.Language.allCases, id: \.self) {
-                                Text(LocalizedStringKey($0.rawValue))
-                            }
-                        }
-                        .pickerStyle(.wheel)
-                        .onChange(of: selectedLanguage) { language in
-                            user.language = language.rawValue
-                            DataManager.shared.update(user: user)
-                        }
-                        
-                        StaticRadioWaveView()
-                    }
+            
+                    ChooseLanguageView(showDoneButton: false)
                     
                     Spacer()
                     
@@ -108,18 +90,6 @@ struct OnboardingView: View {
             .navigationBarBackButtonHidden(true)
             .navigationTitle(LocalizedStringKey("P2P Talk"))
             
-        }
-        
-        // set picker selection to user's set language
-        .onAppear {
-            switch user.language {
-            case User.Language.english.rawValue:
-                selectedLanguage = .english
-            case User.Language.russian.rawValue:
-                selectedLanguage = .russian
-            default:
-                return
-            }
         }
         .onChange(of: isOnboardingCompleted) { newValue in
             if newValue {
