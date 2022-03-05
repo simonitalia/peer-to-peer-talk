@@ -9,30 +9,36 @@ import SwiftUI
 
 struct OnboardingView: View {
     @EnvironmentObject var user: User
-    @Binding var isPresented: Bool
     
-    // Language properties
-    @AppStorage("languageIdentifier") private var languageIdentifier = MainView.Language.Identifier.en
-    @State private var selectedLanguage: MainView.Language = .english
-    @State private var isOnboardingCompleted = false
+    @State private var selectedLanguage = User.Language.english
     @State private var pageIndex = 0
+    @State private var isOnboardingCompleted = false
     
     var body: some View {
         NavigationView {
-
             TabView(selection: $pageIndex) {
+            
+                // MARK: Onboarding Screen: Select Language
                 
-                // MARK: Onboarding Screen: Welcome
                 VStack {
                     Spacer()
                     
-                    Text("Welcome to P2P Talk")
-                        .font(.title)
-                        .fontWeight(.bold)
+                    Text(LocalizedStringKey("Set language"))
+                        .font(.title2)
                         .padding()
                     
                     ZStack {
-                        Image("MainTextBubble")
+                        Picker(LocalizedStringKey("Please choose your language"), selection: $selectedLanguage) {
+                            ForEach(User.Language.allCases, id: \.self) {
+                                Text(LocalizedStringKey($0.rawValue))
+                            }
+                        }
+                        .pickerStyle(.wheel)
+                        .onChange(of: selectedLanguage) { language in
+                            user.language = language.rawValue
+                            DataManager.shared.update(user: user)
+                        }
+                        
                         StaticRadioWaveView()
                     }
                     
@@ -41,7 +47,7 @@ struct OnboardingView: View {
                     Button {
                         pageIndex = 1
                     } label: {
-                        Text("Get Started")
+                        Text(LocalizedStringKey("Continue"))
                         Image(systemName: "arrow.forward")
                     }
                     .frame(minWidth: 0, maxWidth: 250, minHeight: 0, maxHeight: 50)
@@ -54,50 +60,13 @@ struct OnboardingView: View {
                 .tag(0)
                 .padding()
                 .frame(maxHeight: .infinity, alignment: .bottom)
-            
-                // MARK: Onboarding Screen: Select Language
-                VStack {
-                    Spacer()
-                    
-                    Text("Set preferred language")
-                        .font(.title2)
-                        .padding()
-                    
-                    ZStack {
-                        Picker("Please choose your language", selection: $selectedLanguage) {
-                            ForEach(MainView.Language.allCases, id: \.self) {
-                                Text(LocalizedStringKey($0.rawValue))
-                            }
-                        }
-                        .pickerStyle(.wheel)
-                        
-                        StaticRadioWaveView()
-                    }
-                    
-                    Spacer()
-                    
-                    Button {
-                        pageIndex = 2
-                    } label: {
-                        Text("Continue")
-                        Image(systemName: "arrow.forward")
-                    }
-                    .frame(minWidth: 0, maxWidth: 250, minHeight: 0, maxHeight: 50)
-                    .background(Color.indigo)
-                    .foregroundColor(.white)
-                    .cornerRadius(30)
-                    
-                    Spacer()
-                }
-                .tag(1)
-                .padding()
-                .frame(maxHeight: .infinity, alignment: .bottom)
                 
                 // MARK: Onboarding Screen: Display Name
+                
                 VStack {
                     Spacer()
                 
-                    Text("Your private name shown to others")
+                    Text(LocalizedStringKey("Anonymous display name"))
                         .font(.title2)
                         .padding()
                     
@@ -116,7 +85,7 @@ struct OnboardingView: View {
                     Button {
                         isOnboardingCompleted.toggle()
                     } label: {
-                        Text("Complete")
+                        Text(LocalizedStringKey("Complete"))
                         Image(systemName: "checkmark")
                     }
                     .frame(minWidth: 0, maxWidth: 250, minHeight: 0, maxHeight: 50)
@@ -126,7 +95,7 @@ struct OnboardingView: View {
                     
                     Spacer()
                 }
-                .tag(2)
+                .tag(1)
                 .padding()
                 .frame(maxHeight: .infinity, alignment: .bottom)
             }
@@ -135,35 +104,35 @@ struct OnboardingView: View {
             .indexViewStyle(.page(backgroundDisplayMode: .always))
             
             // Navigation modifiers
-            .navigationTitle(LocalizedStringKey("P2P Talk"))
             .navigationBarTitleDisplayMode(.inline)
+            .navigationBarBackButtonHidden(true)
+            .navigationTitle(LocalizedStringKey("P2P Talk"))
+            
         }
-        .onChange(of: selectedLanguage) { language in
-            setLanguage(to: language)
+        
+        // set picker selection to user's set language
+        .onAppear {
+            switch user.language {
+            case User.Language.english.rawValue:
+                selectedLanguage = .english
+            case User.Language.russian.rawValue:
+                selectedLanguage = .russian
+            default:
+                return
+            }
         }
         .onChange(of: isOnboardingCompleted) { newValue in
             if newValue {
                 user.hasCompletedOnboarding.toggle()
-                isPresented.toggle()
                 DataManager.shared.update(user: user)
             }
-        }
-    }
-    
-    private func setLanguage(to language: MainView.Language) {
-        
-        switch language {
-        case .english:
-            self.languageIdentifier = .en
-
-        case .russian:
-            self.languageIdentifier = .ru
         }
     }
 }
 
 struct OnboardingView_Previews: PreviewProvider {
     static var previews: some View {
-        OnboardingView(isPresented: .constant(true)).environmentObject(User.sampleUser)
+        OnboardingView()
+            .environmentObject(User.sampleUser)
     }
 }

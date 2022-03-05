@@ -13,11 +13,23 @@ struct PeerToPeerTalkApp: App {
 	
     var body: some Scene {
         WindowGroup {
-			MainView(
-                mcServiceManager: MCServiceManager(
-                    user: user
+            if !user.hasAcceptedPrivacyPolicy {
+                WelcomeView()
+                    .environmentObject(user)
+                    .environment(\.locale, .init(identifier: user.language))
+            
+            } else if !user.hasCompletedOnboarding {
+                OnboardingView()
+                    .environmentObject(user)
+                    .environment(\.locale, .init(identifier: user.language))
+            } else {
+                MainView(
+                    mcServiceManager: MCServiceManager(
+                        user: user)
                 )
-            ).environmentObject(user)
+                .environmentObject(user)
+                .environment(\.locale, .init(identifier: user.language))
+            }
         }
     }
 }

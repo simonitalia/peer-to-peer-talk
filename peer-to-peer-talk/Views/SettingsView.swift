@@ -13,25 +13,48 @@ struct SettingsView: View {
     @AppStorage("languageIdentifier") private var languageIdentifier = "en"
     
     var body: some View {
-		NavigationView {
-            VStack {
-                Picker("Please choose the language", selection: $selectedLanguage) {
-                    ForEach(languages, id: \.self) {
-                        Text(LocalizedStringKey($0))
-                    }
-                }
-                Button {
-                    if selectedLanguage == "English" {
-                        self.languageIdentifier = "en"
-                        
-                    } else {
-                        self.languageIdentifier = "ru"
-                    }
+		
+        NavigationView {
+        
+            List {
+                Section("Display Name") {
+                    Text("Change Display Name")
                     
-                } label: {
-                    Text("Select")
                 }
+            
+                Section("Privacy") {
+                    Text("Review Privacy Policy")
+                    Text("Accept Local Area Network")
+                    
+                    
+                    
+                }
+                
+                
+                
             }
+            .navigationTitle("Settings")
+            .navigationBarTitleDisplayMode(.inline)
+            
+            
+//            VStack {
+//                Picker("Please choose the language", selection: $selectedLanguage) {
+//                    ForEach(languages, id: \.self) {
+//                        Text(LocalizedStringKey($0))
+//                    }
+//                }
+//                Button {
+//                    if selectedLanguage == "English" {
+//                        self.languageIdentifier = "en"
+//
+//                    } else {
+//                        self.languageIdentifier = "ru"
+//                    }
+//
+//                } label: {
+//                    Text("Select")
+//                }
+//            }
 		}
     }
 }

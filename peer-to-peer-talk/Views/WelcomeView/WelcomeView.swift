@@ -1,0 +1,72 @@
+//
+//  WelcomeView.swift
+//  peer-to-peer-talk
+//
+//  Created by Simon Italia on 04/03/22.
+//
+
+import SwiftUI
+
+struct WelcomeView: View {
+    @EnvironmentObject var user: User
+    
+    @State private var isPresentingPrivacyPolicy = false
+    @State private var presentOnboardingView: Int? = nil
+    
+    var body: some View {
+        NavigationView {
+            
+            VStack {
+                Spacer()
+                
+                Text(LocalizedStringKey("Welcome to P2P Talk"))
+                    .font(.title)
+                    .fontWeight(.bold)
+                    .padding()
+                
+                ZStack {
+                    Image("MainTextBubble")
+                    StaticRadioWaveView()
+                }
+                
+                Spacer()
+                
+                NavigationLink(
+                    destination: OnboardingView()
+                        .environmentObject(user),
+                    tag: 1,
+                    selection: $presentOnboardingView)
+                {
+                    Button {
+                        if !user.hasAcceptedPrivacyPolicy {
+                            isPresentingPrivacyPolicy.toggle()
+                        } else {
+                            self.presentOnboardingView = 1
+                        }
+                    } label: {
+                        Text(user.hasAcceptedPrivacyPolicy ? LocalizedStringKey("Continue") : LocalizedStringKey("Get Started"))
+                        Image(systemName: "arrow.forward")
+                    }
+                    .frame(minWidth: 0, maxWidth: 250, minHeight: 0, maxHeight: 50)
+                    .background(Color.indigo)
+                    .foregroundColor(.white)
+                    .cornerRadius(30)
+                }
+                
+                Spacer()
+            }
+            .padding()
+            .frame(maxHeight: .infinity, alignment: .bottom)
+        }
+        .sheet(isPresented: $isPresentingPrivacyPolicy) {
+            PrivacyPolicyView(isPresented: $isPresentingPrivacyPolicy)
+        }
+    }
+}
+
+struct WelcomeView_Previews: PreviewProvider {
+    static var previews: some View {
+        WelcomeView()
+            .environmentObject(User.sampleUser)
+    }
+}

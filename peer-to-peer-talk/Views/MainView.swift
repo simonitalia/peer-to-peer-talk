@@ -8,50 +8,29 @@
 import SwiftUI
 
 struct MainView: View {
-    
-    enum Language: String, CaseIterable {
-        case english = "English", russian = "Russian"
-        
-        enum Identifier: String {
-            case en, ru
-        }
-    }
-    
-    @AppStorage("languageIdentifier") private var languageIdentifier = MainView.Language.Identifier.en
-	@EnvironmentObject var user: User
-	@StateObject var mcServiceManager: MCServiceManager
+    @EnvironmentObject var user: User
+    @StateObject var mcServiceManager: MCServiceManager
     
 	@State private var selectedTabViewItem = 0
-	@State private var presentOnboardingView: Bool = false
 
     var body: some View {
 		
 		ZStack {
-			if user.hasCompletedOnboarding {
-		
-				TabView(selection: $selectedTabViewItem) {
-					ChatView()
-						.tabItem {
-							Label("Chat", systemImage: "bubble.left.and.bubble.right.fill")
-						}
-						.tag(0)
-					
-                    SettingsView()
-						.tabItem {
-							Label("Settings", systemImage: "gear.circle.fill")
-						}
-						.tag(1)
-				}
-            
-            } else {
-                OnboardingView(isPresented: $presentOnboardingView)
+            TabView(selection: $selectedTabViewItem) {
+                ChatView()
+                    .tabItem {
+                        Label("Chat", systemImage: "bubble.left.and.bubble.right.fill")
+                    }
+                    .tag(0)
+                
+                SettingsView()
+                    .tabItem {
+                        Label("Settings", systemImage: "gear.circle.fill")
+                    }
+                    .tag(1)
             }
 		}
-		.onAppear {
-			presentOnboardingView = !user.hasCompletedOnboarding
-		}
         .environmentObject(mcServiceManager)
-        .environment(\.locale, .init(identifier: self.languageIdentifier.rawValue))
     }
 }
 

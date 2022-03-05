@@ -11,6 +11,8 @@
 		2A12C1A627C27912009DE6D1 /* ButtonStyle+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A12C1A527C27912009DE6D1 /* ButtonStyle+Extensions.swift */; };
 		2A84077627CEB7400074031D /* DataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A84077527CEB7400074031D /* DataManager.swift */; };
 		2A84077827D02B240074031D /* RadioWaveView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A84077727D02B240074031D /* RadioWaveView.swift */; };
+		2A84077A27D28C6C0074031D /* PrivacyPolicyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A84077927D28C6C0074031D /* PrivacyPolicyView.swift */; };
+		2A84077D27D2AB670074031D /* WelcomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A84077C27D2AB670074031D /* WelcomeView.swift */; };
 		2A9D3DDB27C1EC5900712DD7 /* OnboardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A9D3DDA27C1EC5900712DD7 /* OnboardingView.swift */; };
 		2A9F4B4327C1748D008F040E /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A9F4B4227C1748D008F040E /* MainView.swift */; };
 		2A9F4B4527C174BA008F040E /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A9F4B4427C174BA008F040E /* SettingsView.swift */; };
@@ -33,6 +35,8 @@
 		2A12C1A527C27912009DE6D1 /* ButtonStyle+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ButtonStyle+Extensions.swift"; sourceTree = "<group>"; };
 		2A84077527CEB7400074031D /* DataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataManager.swift; sourceTree = "<group>"; };
 		2A84077727D02B240074031D /* RadioWaveView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RadioWaveView.swift; sourceTree = "<group>"; };
+		2A84077927D28C6C0074031D /* PrivacyPolicyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrivacyPolicyView.swift; sourceTree = "<group>"; };
+		2A84077C27D2AB670074031D /* WelcomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeView.swift; sourceTree = "<group>"; };
 		2A9D3DDA27C1EC5900712DD7 /* OnboardingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingView.swift; sourceTree = "<group>"; };
 		2A9F4B4227C1748D008F040E /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
 		2A9F4B4427C174BA008F040E /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
@@ -72,6 +76,7 @@
 		2A12C1A127C277C5009DE6D1 /* Chat View */ = {
 			isa = PBXGroup;
 			children = (
+				2A9F4B4627C174F9008F040E /* PeerBrowserView.swift */,
 				2AF0459927B2B09D0002FB71 /* ChatView.swift */,
 				EEB41EB427BBE6DD00BE76BD /* TextBubbleView.swift */,
 				EEB41EEE27BE694800BE76BD /* ChatHelper.swift */,
@@ -106,6 +111,15 @@
 				EEB41EF027BE6A6500BE76BD /* Message.swift */,
 			);
 			path = Models;
+			sourceTree = "<group>";
+		};
+		2A84077B27D2AB280074031D /* WelcomeView */ = {
+			isa = PBXGroup;
+			children = (
+				2A84077C27D2AB670074031D /* WelcomeView.swift */,
+				2A84077927D28C6C0074031D /* PrivacyPolicyView.swift */,
+			);
+			path = WelcomeView;
 			sourceTree = "<group>";
 		};
 		2AF0458B27B2B09D0002FB71 = {
@@ -150,8 +164,8 @@
 			isa = PBXGroup;
 			children = (
 				2A9F4B4227C1748D008F040E /* MainView.swift */,
+				2A84077B27D2AB280074031D /* WelcomeView */,
 				2A12C1A227C277D2009DE6D1 /* Onboarding View */,
-				2A9F4B4627C174F9008F040E /* PeerBrowserView.swift */,
 				2A12C1A127C277C5009DE6D1 /* Chat View */,
 				2A9F4B4427C174BA008F040E /* SettingsView.swift */,
 			);
@@ -233,7 +247,9 @@
 				2AEA957627B4178A009C7645 /* MCServiceManager.swift in Sources */,
 				2A84077627CEB7400074031D /* DataManager.swift in Sources */,
 				2A9F4B4327C1748D008F040E /* MainView.swift in Sources */,
+				2A84077A27D28C6C0074031D /* PrivacyPolicyView.swift in Sources */,
 				2A84077827D02B240074031D /* RadioWaveView.swift in Sources */,
+				2A84077D27D2AB670074031D /* WelcomeView.swift in Sources */,
 				2AF0459A27B2B09D0002FB71 /* ChatView.swift in Sources */,
 				2A9D3DDB27C1EC5900712DD7 /* OnboardingView.swift in Sources */,
 				EEB41EB527BBE6DD00BE76BD /* TextBubbleView.swift in Sources */,
