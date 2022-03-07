@@ -18,10 +18,12 @@ struct SettingsView: View {
         NavigationView {
             
             List {
+                //Display Name
                 Section(LocalizedStringKey("Display name")) {
                     Label(user.name, systemImage: "person")
                 }
                 
+                //Language
                 Section(
                     header: Text(LocalizedStringKey("Language"))
                     ,
@@ -39,7 +41,7 @@ struct SettingsView: View {
                     }
                     
                     HStack {
-                        Label(Locale.preferredLanguages[0].localizedUppercase, systemImage: "iphone")
+                        Label(Utils.getCurrentDeviceLanguage(), systemImage: "iphone")
                             .onTapGesture {
                                 Utils.openSettingsUrl(path: .localNetwork)
                             }
@@ -49,6 +51,7 @@ struct SettingsView: View {
                     }
                 }
                 
+                //Privacy
                 Section(
                     header: Text(LocalizedStringKey("Privacy")),
                     footer: Text(LocalizedStringKey("P2P Talk requires Local Network access to function. Please ensure Local Network is enabled."))

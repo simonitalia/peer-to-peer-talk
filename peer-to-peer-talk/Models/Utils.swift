@@ -21,4 +21,14 @@ class Utils {
             UIApplication.shared.open(url, options: [:], completionHandler: nil)
         }
     }
+    
+    class func getAllDeviceLanguages() -> [String]? {
+        return UserDefaults.standard.stringArray(forKey: "AppleLanguages")
+    }
+    
+    class func getCurrentDeviceLanguage() -> String {
+        guard let langs = UserDefaults.standard.stringArray(forKey: "AppleLanguages"), let lang = langs.first else { return "Unknown" }
+        
+        return lang.localizedUppercase
+    }
 }
