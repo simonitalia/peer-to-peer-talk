@@ -23,14 +23,25 @@ struct SettingsView: View {
                 }
                 
                 Section(
-                    header: Text(LocalizedStringKey("Language")),
-                    footer: Text(LocalizedStringKey("Some features of P2P Talk use your device's preferred language. To also modify this setting, go to Settings > P2P Talk > Language."))
+                    header: Text(LocalizedStringKey("Language"))
+                    ,
+                    footer: Text(LocalizedStringKey("Some features of P2P Talk use your device's preferred language."))
                 ) {
                     
                     HStack {
                         Label(user.language, systemImage: "globe.europe.africa")
                             .onTapGesture {
                                 isPresentingChooseLanguageView.toggle()
+                            }
+                        Spacer()
+                        Image(systemName: "chevron.forward")
+                            .foregroundColor(.indigo)
+                    }
+                    
+                    HStack {
+                        Label(Locale.preferredLanguages[0].localizedUppercase, systemImage: "iphone")
+                            .onTapGesture {
+                                Utils.openSettingsUrl(path: .localNetwork)
                             }
                         Spacer()
                         Image(systemName: "chevron.forward")
