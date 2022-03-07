@@ -7,17 +7,12 @@
 
 import SwiftUI
 
-struct BigPaddedButtonStyle: ButtonStyle {
-	func makeBody(configuration: Configuration) -> some View {
-		let steelGray = Color(white: 0.8)
-		return configuration
-			.label
-			.foregroundColor(configuration.isPressed ? .gray : .black)
-			.padding(EdgeInsets(top: 0, leading: 110, bottom: 0, trailing: 110))
-			.frame(minWidth: 0, maxWidth: .infinity)
-			.padding()
-			.background(steelGray)
-			.cornerRadius(10)
-			.padding(10)
-	}
+struct P2PTalkButtonStyle: ButtonStyle {
+    func makeBody(configuration: Configuration) -> some View {
+        configuration.label
+            .frame(minWidth: 0, maxWidth: 250, minHeight: 0, maxHeight: 50)
+            .background(Constants.Colors.buttonBackgroundColor)
+            .foregroundColor(Constants.Colors.buttonSecondaryForegroundColor)
+            .cornerRadius(30)
+        }
 }

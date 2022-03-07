@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		1C92970627BE8A69002AAF11 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 1C92970827BE8A69002AAF11 /* Localizable.strings */; };
 		2A12C1A627C27912009DE6D1 /* ButtonStyle+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A12C1A527C27912009DE6D1 /* ButtonStyle+Extensions.swift */; };
+		2A25915F27D6640500EE25A3 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A25915E27D6640500EE25A3 /* Constants.swift */; };
 		2A3153E927D3FB760099A93F /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A3153E827D3FB750099A93F /* Utils.swift */; };
 		2A84077627CEB7400074031D /* DataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A84077527CEB7400074031D /* DataManager.swift */; };
 		2A84077827D02B240074031D /* RadioWaveView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A84077727D02B240074031D /* RadioWaveView.swift */; };
@@ -35,6 +36,7 @@
 		1C92970727BE8A69002AAF11 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		1C92970927BE8A90002AAF11 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/Localizable.strings; sourceTree = "<group>"; };
 		2A12C1A527C27912009DE6D1 /* ButtonStyle+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ButtonStyle+Extensions.swift"; sourceTree = "<group>"; };
+		2A25915E27D6640500EE25A3 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		2A3153E827D3FB750099A93F /* Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utils.swift; sourceTree = "<group>"; };
 		2A84077527CEB7400074031D /* DataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataManager.swift; sourceTree = "<group>"; };
 		2A84077727D02B240074031D /* RadioWaveView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RadioWaveView.swift; sourceTree = "<group>"; };
@@ -115,6 +117,7 @@
 				EEB41EF227BE6AA200BE76BD /* User.swift */,
 				EEB41EF027BE6A6500BE76BD /* Message.swift */,
 				2A3153E827D3FB750099A93F /* Utils.swift */,
+				2A25915E27D6640500EE25A3 /* Constants.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -265,6 +268,7 @@
 				2AF0459827B2B09D0002FB71 /* PeerToPeerTalkApp.swift in Sources */,
 				2A3153E927D3FB760099A93F /* Utils.swift in Sources */,
 				EEB41EEF27BE694800BE76BD /* ChatHelper.swift in Sources */,
+				2A25915F27D6640500EE25A3 /* Constants.swift in Sources */,
 				2A9F4B4727C174F9008F040E /* PeerBrowserView.swift in Sources */,
 				EEB41EF327BE6AA200BE76BD /* User.swift in Sources */,
 				2A9F4B4527C174BA008F040E /* SettingsView.swift in Sources */,

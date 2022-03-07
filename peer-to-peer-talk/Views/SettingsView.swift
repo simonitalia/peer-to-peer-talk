@@ -35,7 +35,7 @@ struct SettingsView: View {
                             }
                         Spacer()
                         Image(systemName: "chevron.forward")
-                            .foregroundColor(.indigo)
+                            .foregroundColor(Constants.Colors.buttonPrimaryForegroundColor)
                     }
                     
                     HStack {
@@ -45,7 +45,7 @@ struct SettingsView: View {
                             }
                         Spacer()
                         Image(systemName: "chevron.forward")
-                            .foregroundColor(.indigo)
+                            .foregroundColor(Constants.Colors.buttonPrimaryForegroundColor)
                     }
                 }
                 
@@ -60,7 +60,7 @@ struct SettingsView: View {
                             }
                         Spacer()
                         Image(systemName: "chevron.forward")
-                                .foregroundColor(.indigo)
+                                .foregroundColor(Constants.Colors.buttonPrimaryForegroundColor)
                     }
                     
                     HStack {
@@ -70,7 +70,7 @@ struct SettingsView: View {
                             }
                         Spacer()
                         Image(systemName: "chevron.forward")
-                                .foregroundColor(.indigo)
+                                .foregroundColor(Constants.Colors.buttonPrimaryForegroundColor)
                     }
                 }
             }

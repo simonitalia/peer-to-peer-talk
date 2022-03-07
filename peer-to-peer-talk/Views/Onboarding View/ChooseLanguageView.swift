@@ -17,9 +17,7 @@ struct ChooseLanguageView: View {
         case done = "Done",
              `continue` = "continue"
     }
-    
-//    @Binding var isDoneButtonTapped: Bool
-    
+
     let showDoneButton: Bool
     
     var body: some View {
@@ -47,12 +45,7 @@ struct ChooseLanguageView: View {
                 Button(LocalizedStringKey(DoneButtonType.done.rawValue)) {
                     presentationMode.wrappedValue.dismiss()
                 }
-   
-                .frame(minWidth: 0, maxWidth: 250, minHeight: 0, maxHeight: 50)
-                .background(Color.indigo)
-                .foregroundColor(.white)
-                .cornerRadius(30)
-                .padding()
+                .buttonStyle(P2PTalkButtonStyle())
             }
             
         }
