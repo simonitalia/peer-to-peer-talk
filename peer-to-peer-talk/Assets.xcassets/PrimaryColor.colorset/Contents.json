@@ -14,10 +14,6 @@
           "value" : "dark"
         }
       ],
-      "color" : {
-        "platform" : "universal",
-        "reference" : "systemIndigoColor"
-      },
       "idiom" : "universal"
     }
   ],

@@ -16,12 +16,12 @@ struct TextBubbleView: View {
         VStack(alignment: message.author.name != user.name ? .leading : .trailing, spacing: 3) {
             Text(message.author.name)
                 .font(.system(size: 12, weight: .medium))
-                .foregroundColor(.black.opacity(0.35))
+                .foregroundColor(Color("TertiaryColor"))
             Text(message.content)
                 .font(.system(size: 20, weight: .regular))
-                .foregroundColor(message.author.name == user.name ? Color.white : Color.black)
+                .foregroundColor(message.author.name == user.name ? Color.white : Color("SecondaryTextColor"))
                 .padding(.all)
-                .background(message.author.name == user.name ? Color.indigo : Color.indigo.opacity(0.1))
+                .background(message.author.name == user.name ? Color("PrimaryColor") : Color("SecondaryColor"))
                 .clipShape(
                     message.author.name == user.name ?
                     ChatRoundedShape(corners: [.topLeft, .bottomLeft, .topRight], radius: 25) :
