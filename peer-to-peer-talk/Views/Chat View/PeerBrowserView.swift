@@ -36,14 +36,15 @@ struct PeerBrowserView: View {
         .alert(isPresented: $isPresentingInvitationFromPeerAlert) {
             
             Alert(
-                title: Text("New Invitation"),
+                title: Text("Chat Invitation"),
                 message: Text("\(receivedInvitationPeerId!.displayName) would like to connect"),
-                primaryButton: .destructive(Text("Decline")) {
-                    invitationResponseHandler(false, nil)
-                },
-                secondaryButton: .default(Text("Accept")) {
+                primaryButton: .default(Text("Accept")) {
                     invitationResponseHandler(true, mcServiceManager.session)
+                },
+                secondaryButton: .destructive(Text("Decline")) {
+                    invitationResponseHandler(false, nil)
                 }
+                
             )
         }
     }

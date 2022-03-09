@@ -44,13 +44,12 @@ struct WelcomeView: View {
                             self.presentOnboardingView = 1
                         }
                     } label: {
-                        Text(user.hasAcceptedPrivacyPolicy ? LocalizedStringKey("Continue") : LocalizedStringKey("Get Started"))
-                        Image(systemName: "arrow.forward")
+                        HStack {
+                            Text(user.hasAcceptedPrivacyPolicy ? LocalizedStringKey("Continue") : LocalizedStringKey("Get Started"))
+                            Image(systemName: "arrow.forward")
+                        }
                     }
-                    .frame(minWidth: 0, maxWidth: 250, minHeight: 0, maxHeight: 50)
-                    .background(Color.indigo)
-                    .foregroundColor(.white)
-                    .cornerRadius(30)
+                    .buttonStyle(P2PTalkButtonStyle())
                 }
                 
                 Spacer()

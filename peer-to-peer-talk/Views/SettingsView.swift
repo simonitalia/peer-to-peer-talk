@@ -18,13 +18,16 @@ struct SettingsView: View {
         NavigationView {
             
             List {
+                //Display Name
                 Section(LocalizedStringKey("Display name")) {
                     Label(user.name, systemImage: "person")
                 }
                 
+                //Language
                 Section(
-                    header: Text(LocalizedStringKey("Language")),
-                    footer: Text(LocalizedStringKey("Some features of P2P Talk use your device's preferred language. To also modify this setting, go to Settings > P2P Talk > Language."))
+                    header: Text(LocalizedStringKey("Language"))
+                    ,
+                    footer: Text(LocalizedStringKey("Some features of P2P Talk use your device's preferred language."))
                 ) {
                     
                     HStack {
@@ -34,10 +37,21 @@ struct SettingsView: View {
                             }
                         Spacer()
                         Image(systemName: "chevron.forward")
-                            .foregroundColor(.indigo)
+                            .foregroundColor(Constants.Colors.buttonPrimaryForegroundColor)
+                    }
+                    
+                    HStack {
+                        Label(Utils.getCurrentDeviceLanguage(), systemImage: "iphone")
+                            .onTapGesture {
+                                Utils.openSettingsUrl(path: .localNetwork)
+                            }
+                        Spacer()
+                        Image(systemName: "chevron.forward")
+                            .foregroundColor(Constants.Colors.buttonPrimaryForegroundColor)
                     }
                 }
                 
+                //Privacy
                 Section(
                     header: Text(LocalizedStringKey("Privacy")),
                     footer: Text(LocalizedStringKey("P2P Talk requires Local Network access to function. Please ensure Local Network is enabled."))
@@ -49,7 +63,7 @@ struct SettingsView: View {
                             }
                         Spacer()
                         Image(systemName: "chevron.forward")
-                                .foregroundColor(.indigo)
+                                .foregroundColor(Constants.Colors.buttonPrimaryForegroundColor)
                     }
                     
                     HStack {
@@ -59,7 +73,7 @@ struct SettingsView: View {
                             }
                         Spacer()
                         Image(systemName: "chevron.forward")
-                                .foregroundColor(.indigo)
+                                .foregroundColor(Constants.Colors.buttonPrimaryForegroundColor)
                     }
                 }
             }

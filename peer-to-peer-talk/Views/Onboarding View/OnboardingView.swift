@@ -29,13 +29,12 @@ struct OnboardingView: View {
                     Button {
                         pageIndex = 1
                     } label: {
-                        Text(LocalizedStringKey("Continue"))
-                        Image(systemName: "arrow.forward")
+                        HStack {
+                            Text(LocalizedStringKey("Continue"))
+                            Image(systemName: "arrow.forward")
+                        }
                     }
-                    .frame(minWidth: 0, maxWidth: 250, minHeight: 0, maxHeight: 50)
-                    .background(Color.indigo)
-                    .foregroundColor(.white)
-                    .cornerRadius(30)
+                    .buttonStyle(P2PTalkButtonStyle())
                     
                     Spacer()
                 }
@@ -67,13 +66,12 @@ struct OnboardingView: View {
                     Button {
                         isOnboardingCompleted.toggle()
                     } label: {
-                        Text(LocalizedStringKey("Complete"))
-                        Image(systemName: "checkmark")
+                        HStack {
+                            Text(LocalizedStringKey("Complete"))
+                            Image(systemName: "checkmark")
+                        }
                     }
-                    .frame(minWidth: 0, maxWidth: 250, minHeight: 0, maxHeight: 50)
-                    .background(Color.indigo)
-                    .foregroundColor(.white)
-                    .cornerRadius(30)
+                    .buttonStyle(P2PTalkButtonStyle())
                     
                     Spacer()
                 }

@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		1C92970627BE8A69002AAF11 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 1C92970827BE8A69002AAF11 /* Localizable.strings */; };
 		2A12C1A627C27912009DE6D1 /* ButtonStyle+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A12C1A527C27912009DE6D1 /* ButtonStyle+Extensions.swift */; };
+		2A25915F27D6640500EE25A3 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A25915E27D6640500EE25A3 /* Constants.swift */; };
+		2A25916127D6BBC600EE25A3 /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2A25916027D6BBC600EE25A3 /* Launch Screen.storyboard */; };
 		2A3153E927D3FB760099A93F /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A3153E827D3FB750099A93F /* Utils.swift */; };
 		2A84077627CEB7400074031D /* DataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A84077527CEB7400074031D /* DataManager.swift */; };
 		2A84077827D02B240074031D /* RadioWaveView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A84077727D02B240074031D /* RadioWaveView.swift */; };
@@ -35,6 +37,8 @@
 		1C92970727BE8A69002AAF11 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		1C92970927BE8A90002AAF11 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/Localizable.strings; sourceTree = "<group>"; };
 		2A12C1A527C27912009DE6D1 /* ButtonStyle+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ButtonStyle+Extensions.swift"; sourceTree = "<group>"; };
+		2A25915E27D6640500EE25A3 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		2A25916027D6BBC600EE25A3 /* Launch Screen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = "Launch Screen.storyboard"; sourceTree = "<group>"; };
 		2A3153E827D3FB750099A93F /* Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utils.swift; sourceTree = "<group>"; };
 		2A84077527CEB7400074031D /* DataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataManager.swift; sourceTree = "<group>"; };
 		2A84077727D02B240074031D /* RadioWaveView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RadioWaveView.swift; sourceTree = "<group>"; };
@@ -115,6 +119,7 @@
 				EEB41EF227BE6AA200BE76BD /* User.swift */,
 				EEB41EF027BE6A6500BE76BD /* Message.swift */,
 				2A3153E827D3FB750099A93F /* Utils.swift */,
+				2A25915E27D6640500EE25A3 /* Constants.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -152,6 +157,7 @@
 				2A12C1A327C2788D009DE6D1 /* Extensions */,
 				1C92970327BE8A3B002AAF11 /* Localization */,
 				2AF045A527B2C9750002FB71 /* Views */,
+				2A25916027D6BBC600EE25A3 /* Launch Screen.storyboard */,
 				2AF0459B27B2B09F0002FB71 /* Assets.xcassets */,
 				2AF0459D27B2B09F0002FB71 /* Preview Content */,
 			);
@@ -239,6 +245,7 @@
 			files = (
 				2AF0459C27B2B09F0002FB71 /* Assets.xcassets in Resources */,
 				2AF0459F27B2B09F0002FB71 /* Preview Assets.xcassets in Resources */,
+				2A25916127D6BBC600EE25A3 /* Launch Screen.storyboard in Resources */,
 				1C92970627BE8A69002AAF11 /* Localizable.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -265,6 +272,7 @@
 				2AF0459827B2B09D0002FB71 /* PeerToPeerTalkApp.swift in Sources */,
 				2A3153E927D3FB760099A93F /* Utils.swift in Sources */,
 				EEB41EEF27BE694800BE76BD /* ChatHelper.swift in Sources */,
+				2A25915F27D6640500EE25A3 /* Constants.swift in Sources */,
 				2A9F4B4727C174F9008F040E /* PeerBrowserView.swift in Sources */,
 				EEB41EF327BE6AA200BE76BD /* User.swift in Sources */,
 				2A9F4B4527C174BA008F040E /* SettingsView.swift in Sources */,
@@ -413,7 +421,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 0.4;
+				CURRENT_PROJECT_VERSION = 0.5;
 				DEVELOPMENT_ASSET_PATHS = "\"peer-to-peer-talk/Preview Content\"";
 				DEVELOPMENT_TEAM = ZAAMW68LZ8;
 				ENABLE_PREVIEWS = YES;
@@ -423,7 +431,7 @@
 				INFOPLIST_KEY_NSLocalNetworkUsageDescription = "Please allow P2P Talk  to discover nearby People";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
-				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UILaunchStoryboardName = "Launch Screen";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
@@ -446,7 +454,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 0.4;
+				CURRENT_PROJECT_VERSION = 0.5;
 				DEVELOPMENT_ASSET_PATHS = "\"peer-to-peer-talk/Preview Content\"";
 				DEVELOPMENT_TEAM = ZAAMW68LZ8;
 				ENABLE_PREVIEWS = YES;
@@ -456,7 +464,7 @@
 				INFOPLIST_KEY_NSLocalNetworkUsageDescription = "Please allow P2P Talk  to discover nearby People";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
-				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UILaunchStoryboardName = "Launch Screen";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
