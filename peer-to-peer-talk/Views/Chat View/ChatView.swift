@@ -13,7 +13,7 @@ struct ChatView: View {
     @State private var isPresententingPeerBrowserView: Bool = true
     @State private var chatThread = [Message]()
     @State private var typedText = ""
-    @State private var isLeavingTheChat = false
+    @State private var isPresentingAlert = false
     @State private var navigationTitleText = ""
     
     
@@ -28,14 +28,6 @@ struct ChatView: View {
         return mcServiceManager.connectedPeers.isEmpty ? "square.and.pencil" : "rectangle.portrait.and.arrow.right.fill"
     }
     
-//    private var navigationStatus: some View {
-//        let image = Image(systemName: "circlebadge.fill").foregroundColor(mcServiceManager.connectedPeers.isEmpty ? Color.gray : Color.green)
-//
-//        let text = Text(" \(navigationTitle)")
-//
-//        let Label(text, image: image)
-//
-//    }
     
     var body: some View {
         NavigationView {
@@ -91,37 +83,22 @@ struct ChatView: View {
                 }
             }
             
-            
             .toolbar {
                 ToolbarItemGroup(placement: .principal) {
-//                    navigationStatus
-                    
                     HStack {
                         Spacer(minLength: 50)
                         Image(systemName: "circlebadge.fill")
                             .foregroundColor(!mcServiceManager.connectedPeers.isEmpty ? Color.green : Color.gray)
-                            Spacer()
+                        Spacer()
                         Text(navigationTitle)
                             .foregroundColor(Color("SecondaryTextColor"))
                         Spacer(minLength: 50)
-                    
-                    
-                    
+                    }
                 }
-                    
-//                    Label(navigationTitle, image: <#T##String#>)
-                    
-                }
-                
                 
                 ToolbarItem {
                     Button {
-                        isPresententingPeerBrowserView.toggle()
-                        if !mcServiceManager.connectedPeers.isEmpty {
-                            self.isLeavingTheChat = true
-                            
-                        }
-                        
+                        mcServiceManager.connectedPeers.isEmpty ? resetChatThread() : (self.isPresentingAlert = true)
                     } label: {
                         Image(systemName: buttonImageTitle)
                             .font(.title2)
@@ -132,14 +109,16 @@ struct ChatView: View {
         }
         
         
-        .alert(isPresented: $isLeavingTheChat) {
-            Alert(title: Text("You are leaving the chat"), message: Text("Are you sure you want to leave the chat?"), primaryButton: .default(Text("No")){
-            }, secondaryButton: .destructive(Text("Yes")) {
-                chatThread.removeAll()
-                isPresententingPeerBrowserView.toggle()
+        .alert(isPresented: $isPresentingAlert) {
+            Alert(title: Text("Leave Chat"), message: Text("Are you sure you want to leave the chat?"),
+                  primaryButton: .default(Text("No")){
+            },
+                  secondaryButton: .destructive(Text("Yes")) {
+                resetChatThread()
             }
             )
         }
+        
         
         .sheet(isPresented: $isPresententingPeerBrowserView) {
             PeerBrowserView(isPresententingMCBrowserViewController: $isPresententingPeerBrowserView).interactiveDismissDisabled()
@@ -161,6 +140,12 @@ struct ChatView: View {
         
         //reset text field
         self.typedText.removeAll()
+    }
+    
+    
+    private func resetChatThread() {
+        chatThread.removeAll()
+        isPresententingPeerBrowserView.toggle()
     }
 }
 
